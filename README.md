@@ -9,8 +9,8 @@ Let's implement 3 classes with inheritance
 - constructor takes `name`, `weight`, `coords`, 
 and saves them
 - `coords` is list with `x` and `y` coordinates, set to [0, 0] by default.
-It is not a good practice to use mutable object by default,
-use condition in constructor to set coords
+It is not a good practice to use mutable object as a default parameter,
+set it to `None` by default, and use condition.
 - `go_forward`, `go_back`, `go_right` and `go_left` methods 
 take a `step` argument (1 by default) and move the robot by
 `step` in the appropriate direction.
@@ -50,11 +50,21 @@ to the parent's constructor.
 - has `unhook_load` method, that set `current_load` to None
 ```python
 cargo = Cargo(14)
-drone = DeliveryDrone(name="Jim", weight=18, coords=[11, -4, 16], max_weight_load=20, current_weight=None)
+drone = DeliveryDrone(name="Jim", weight=18, coords=[11, -4, 16], 
+                      max_weight_load=20, current_load=None)
 drone.hook_load(cargo)
 drone.current_load is cargo
 
 cargo2 = Cargo(2)
 drone.hook_load(cargo2)
-drone.current_load is cargo  # didn't hook cargo2
+drone.current_load is cargo  
+# didn't hook cargo2, cargo already in current load
+```
+```python
+drone = DeliveryDrone(name="Jack", 
+                      weight=9, 
+                      max_weight_load=30, 
+                      current_load=Cargo(20))
+drone.unhook_load()
+drone.current_load is None
 ```
