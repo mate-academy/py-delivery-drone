@@ -58,11 +58,11 @@ def test_flying_robot_go():
     assert robot.coords == [-4, -1, 0]
     robot.go_up(3)
     assert robot.coords == [-4, -1, 3]
-    robot.go_up(1)
+    robot.go_up()
     assert robot.coords == [-4, -1, 4]
     robot.go_down(4)
     assert robot.coords == [-4, -1, 0]
-    robot.go_down(1)
+    robot.go_down()
     assert robot.coords == [-4, -1, -1]
 
 
