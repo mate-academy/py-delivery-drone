@@ -2,7 +2,7 @@ import pytest
 import ast
 import inspect
 
-from app.reference_delievery_drone import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
+from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
 
 
 @pytest.mark.parametrize(
