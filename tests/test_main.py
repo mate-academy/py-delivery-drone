@@ -2,7 +2,7 @@ import pytest
 import ast
 import inspect
 
-from app.reference_delievery_drone import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
+from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
 
 
 @pytest.mark.parametrize(
@@ -58,11 +58,11 @@ def test_flying_robot_go():
     assert robot.coords == [-4, -1, 0]
     robot.go_up(3)
     assert robot.coords == [-4, -1, 3]
-    robot.go_up()
+    robot.go_up(1)
     assert robot.coords == [-4, -1, 4]
     robot.go_down(4)
     assert robot.coords == [-4, -1, 0]
-    robot.go_down()
+    robot.go_down(1)
     assert robot.coords == [-4, -1, -1]
 
 
