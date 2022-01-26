@@ -44,7 +44,7 @@ flying_robot.coords = [0, 0, 10]
 - takes the same args as `FlyingRobot` and passes them 
 to the parent's constructor. 
 - constructor also takes and stores `max_load_weight` and `current_load`.
-- has `hood_load` method taking `Cargo` object and saves it to
+- has `hook_load` method taking `Cargo` object and saves it to
 `current_load` if `current_load` is `None` and `cargo.weight` not greater than
 `max_load_weight` of the drone
 - has `unhook_load` method, that set `current_load` to None
