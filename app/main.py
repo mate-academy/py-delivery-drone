@@ -10,19 +10,15 @@ class BaseRobot:
         self.coords = coords if coords is not None else [0, 0]
 
     def go_forward(self, step: int = 1):
-
         self.coords[1] += step
 
     def go_back(self, step: int = 1):
-
         self.coords[1] -= step
 
     def go_right(self, step: int = 1):
-
         self.coords[0] += step
 
     def go_left(self, step: int = 1):
-
         self.coords[0] -= step
 
     def get_info(self):
