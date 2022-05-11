@@ -59,22 +59,3 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self):
         self.current_load = None
-
-
-if __name__ == "__main__":
-    cargo = Cargo(14)
-    drone = DeliveryDrone(name="Jim", weight=18, coords=[11, -4, 16],
-                          max_weight_load=20, current_load=None)
-    drone.hook_load(cargo)
-    print(drone.current_load is cargo)
-
-    cargo2 = Cargo(2)
-    drone.hook_load(cargo2)
-    print(drone.current_load is cargo)
-
-    drone = DeliveryDrone(name="Jack",
-                          weight=9,
-                          max_weight_load=30,
-                          current_load=Cargo(20))
-    drone.unhook_load()
-    print(drone.current_load is None)
