@@ -7,10 +7,7 @@ class BaseRobot:
     def __init__(self, name, weight, coords=None):
         self.name = name
         self.weight = weight
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords
+        self.coords = [0, 0] if coords is None else coords
 
     def go_forward(self, step=1):
         self.coords[1] += step
