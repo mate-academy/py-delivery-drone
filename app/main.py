@@ -21,7 +21,7 @@ class BaseRobot:
     def go_left(self, step: int = 1):
         self.coords[0] -= step
 
-    def get_ingo(self):
+    def get_info(self):
         return f"Robot: {self.name}, Weight: {self.weight}"
 
 
