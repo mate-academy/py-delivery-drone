@@ -46,10 +46,7 @@ class FlyingRobot(BaseRobot):
         self.coords[2] += step
 
     def go_down(self, step: int = 1):
-        # if self.coords[2] - step >= 0:
         self.coords[2] -= step
-        # else:
-        #      print("Wanna dig down?")
 
 
 class DeliveryDrone(FlyingRobot):
@@ -58,7 +55,7 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  max_load_weight: int,
                  current_load: bool):
-        super().__init__(name, weight)
+        super().__init__(name, weight, coords=None)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
