@@ -36,7 +36,6 @@ class FlyingRobot(BaseRobot):
         else:
             self.coords = coords
 
-
     def go_up(self, step: int = 1):
         self.coords[2] += step
 
