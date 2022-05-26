@@ -38,6 +38,13 @@ def test_base_robot_go():
     assert robot.coords == [-4, -1]
 
 
+def test_base_robot_do_not_use_mutable_as_default():
+    robot_1 = BaseRobot("", 1)
+    robot_2 = BaseRobot("", 1)
+    robot_1.go_forward(1)
+    assert robot_2.coords == [0, 0]
+
+
 def test_flying_robot_go():
     robot = FlyingRobot("Michael", 40)
     robot.go_forward(4)
@@ -79,16 +86,33 @@ def test_flying_robot_has_attrs(args, result):
     assert (robot.name, robot.weight, robot.coords) == result
 
 
+def test_flying_robot_do_not_use_mutable_as_default():
+    robot_1 = FlyingRobot("", 1)
+    robot_2 = FlyingRobot("", 1)
+    robot_1.go_up(1)
+    assert robot_2.coords == [0, 0, 0]
+
+
 def test_deliver_robot_hook_load_cargo_is_not_heavy():
     cargo = Cargo(20)
-    drone = DeliveryDrone("Mike", 12, 30, None)
+    drone = DeliveryDrone(
+        name="Mike",
+        weight=12,
+        max_load_weight=30,
+        current_load=None,
+    )
     drone.hook_load(cargo)
     assert isinstance(drone.current_load, Cargo)
 
 
 def test_deliver_robot_hook_load_cargo_is_too_heavy():
     cargo = Cargo(50)
-    drone = DeliveryDrone("Mike", 12, 30, None)
+    drone = DeliveryDrone(
+        name="Mike",
+        weight=12,
+        max_load_weight=30,
+        current_load=None,
+    )
     drone.hook_load(cargo)
     assert drone.current_load is None
 
@@ -96,13 +120,23 @@ def test_deliver_robot_hook_load_cargo_is_too_heavy():
 def test_deliver_robot_hook_load_cargo_current_load_isnt_none():
     cargo = Cargo(20)
     cargo2 = Cargo(12)
-    drone = DeliveryDrone("Mike", 12, 30, cargo2)
+    drone = DeliveryDrone(
+        name="Mike",
+        weight=12,
+        max_load_weight=30,
+        current_load=cargo2,
+    )
     drone.hook_load(cargo)
     assert drone.current_load is cargo2
 
 
 def test_deliver_robot_unhook_load():
-    drone = DeliveryDrone("Mike", 12, 30, Cargo(12))
+    drone = DeliveryDrone(
+        name="Mike",
+        weight=12,
+        max_load_weight=30,
+        current_load=Cargo(12),
+    )
     drone.unhook_load()
     assert drone.current_load is None
 
