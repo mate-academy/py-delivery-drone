@@ -46,7 +46,7 @@ def test_base_robot_do_not_use_mutable_as_default():
 
 
 def test_flying_robot_go():
-    robot = FlyingRobot("Michael", 40, [0, 0, 0])
+    robot = FlyingRobot("Michael", 40)
     robot.go_forward(4)
     assert robot.coords == [0, 4, 0]
     robot.go_forward()
@@ -81,14 +81,14 @@ def test_flying_robot_go():
     ]
 )
 def test_flying_robot_has_attrs(args, result):
-    robot = FlyingRobot(,
+    robot = FlyingRobot(*args)
     assert all([hasattr(robot, attr) for attr in ["name", "weight", "coords"]])
     assert (robot.name, robot.weight, robot.coords) == result
 
 
 def test_flying_robot_do_not_use_mutable_as_default():
-    robot_1 = FlyingRobot("", 1, [0, 0, 0])
-    robot_2 = FlyingRobot("", 1, [0, 0, 0])
+    robot_1 = FlyingRobot("", 1)
+    robot_2 = FlyingRobot("", 1)
     robot_1.go_up(1)
     assert robot_2.coords == [0, 0, 0]
 
