@@ -19,7 +19,7 @@ class BaseRobot:
     def go_back(self, step=1):
         self.coords[1] -= step
 
-    def go_right(self, step=1)
+    def go_right(self, step=1):
         self.coords[0] += step
 
     def go_left(self, step=1):
