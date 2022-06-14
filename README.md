@@ -28,7 +28,7 @@ robot.coords == [4, 3]
 
 - inherits from `BaseRobot`
 - takes the same args as BaseRobot and passes them to the 
-parent's constructor (use super)
+parent's constructor (use super) 
 - can work with z coordinate, coords by default should be [0, 0, 0], 
 use condition to send right coords to parent's constructor
 - has methods `go_up` and `go_down` changing `z`, positive Z axis is up
