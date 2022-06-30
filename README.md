@@ -19,9 +19,9 @@ Positive Y axis is forward, positive X axis is right.
 ```python
 robot = BaseRobot(name="Walle", weight=34, coords=[3, -2])
 robot.go_forward()
-robot.coords == [4, -2]
+robot.coords == [3, -1]
 robot.go_right(5)
-robot.coords == [4, 3]
+robot.coords == [8, -1]
 ```
 
 **FlyingRobot**
