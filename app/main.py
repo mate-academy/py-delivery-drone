@@ -4,7 +4,7 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name, weight, coords: list = None ):
+    def __init__(self, name, weight, coords: list = None):
         self.name = name
         self.weight = weight
         self.coords = coords if coords is not None else [0, 0]
