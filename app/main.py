@@ -27,7 +27,7 @@ class BaseRobot:
         self.coords[X] -= step
 
     def get_info(self):
-        return f'Robot: {self.name}, Weight: {self.weight}'
+        return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
