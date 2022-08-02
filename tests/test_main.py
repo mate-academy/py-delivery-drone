@@ -47,7 +47,7 @@ def test_base_robot_do_not_use_mutable_as_default():
 
 def test_base_robot_get_info_method():
     robot = BaseRobot("Michael", 40)
-    assert robot.get_info == "Robot: Michael, Weight: 40"
+    assert robot.get_info() == "Robot: Michael, Weight: 40"
 
 
 def test_flying_robot_go():
