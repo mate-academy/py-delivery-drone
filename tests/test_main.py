@@ -45,6 +45,11 @@ def test_base_robot_do_not_use_mutable_as_default():
     assert robot_2.coords == [0, 0]
 
 
+def test_base_robot_get_info_method():
+    robot = BaseRobot("Michael", 40)
+    assert robot.get_info == "Robot: Michael, Weight: 40"
+
+
 def test_flying_robot_go():
     robot = FlyingRobot("Michael", 40)
     robot.go_forward(4)
@@ -99,6 +104,18 @@ def test_deliver_robot_hook_load_cargo_is_not_heavy():
         name="Mike",
         weight=12,
         max_load_weight=30,
+        current_load=None,
+    )
+    drone.hook_load(cargo)
+    assert isinstance(drone.current_load, Cargo)
+
+
+def test_deliver_robot_hook_load_cargo_equals_max_load_weight():
+    cargo = Cargo(20)
+    drone = DeliveryDrone(
+        name="Mike",
+        weight=12,
+        max_load_weight=20,
         current_load=None,
     )
     drone.hook_load(cargo)
