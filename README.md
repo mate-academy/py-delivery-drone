@@ -51,7 +51,7 @@ to the parent's constructor.
 ```python
 cargo = Cargo(14)
 drone = DeliveryDrone(name="Jim", weight=18, coords=[11, -4, 16], 
-                      max_weight_load=20, current_load=None)
+                      max_load_weight=20, current_load=None)
 drone.hook_load(cargo)
 drone.current_load is cargo
 
