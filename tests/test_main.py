@@ -284,6 +284,12 @@ def test_removed_comment():
                  "weight": int,
                  "max_load_weight": int,
                  "current_load": Cargo | NoneType,
+                 "return": NoneType} |
+                {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "max_load_weight": int,
+                 "current_load": Cargo,
                  "return": NoneType}
         ),
         (
@@ -298,5 +304,6 @@ def test_removed_comment():
 )
 def test_added_type_annotation(function: Callable, result: dict) -> None:
     hints = typing.get_type_hints(function)
+    print(hints)
     assert dict(hints) == result, "Add or fix type annotation for methods"
 
