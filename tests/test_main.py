@@ -1,6 +1,10 @@
+from types import NoneType
+
 import pytest
 import ast
 import inspect
+import typing
+from typing import Callable
 
 from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
 
@@ -218,3 +222,81 @@ def test_methods_declared_in_inherited_classes(class_, methods, length):
     assert (
             [parsed_class.body[0].body[it].name for it in range(length)] == methods
     ), f"Only {methods} should be defined inside class '{class_.__name__}'"
+
+
+def test_removed_comment():
+    import app
+    with open(app.main.__file__, "r") as file:
+        file_content = file.read()
+        assert "# write your code here" not in file_content, ("You have to"
+               " remove the unnecessary comment '# write your code here'")
+
+
+@pytest.mark.parametrize(
+    "function,result",
+    [
+        (
+                BaseRobot.__init__,
+                {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "return": NoneType}
+        ),
+        (
+                BaseRobot.go_forward,
+                {"step": int, "return": NoneType}
+        ),
+        (
+                BaseRobot.go_back,
+                {"step": int, "return": NoneType}
+        ),
+        (
+                BaseRobot.go_left,
+                {"step": int, "return": NoneType}
+        ),
+        (
+                BaseRobot.go_right,
+                {"step": int, "return": NoneType}
+        ),
+        (
+                BaseRobot.get_info,
+                {} | {"return": str}
+        ),
+        (
+                FlyingRobot.__init__,
+                {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "return": NoneType}
+        ),
+        (
+                FlyingRobot.go_down,
+                {"step": int, "return": NoneType}
+        ),
+        (
+                FlyingRobot.go_up,
+                {"step": int, "return": NoneType}
+        ),
+        (
+                DeliveryDrone.__init__,
+                {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "max_load_weight": int,
+                 "current_load": Cargo | NoneType,
+                 "return": NoneType}
+        ),
+        (
+                DeliveryDrone.hook_load,
+                {"cargo": Cargo, "return": NoneType}
+        ),
+        (
+                DeliveryDrone.unhook_load,
+                {} | {"return": NoneType}
+        ),
+    ]
+)
+def test_added_type_annotation(function: Callable, result: dict) -> None:
+    hints = typing.get_type_hints(function)
+    assert dict(hints) == result, "Add or fix type annotation for methods"
+

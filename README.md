@@ -1,6 +1,7 @@
 # Delivery drone
 
-- Read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md) before start
+**Please note:** read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md)
+before starting.
 
 Let's implement 3 classes with inheritance
 
