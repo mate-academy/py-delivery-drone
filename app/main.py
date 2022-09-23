@@ -1,5 +1,5 @@
 class Cargo:
-    def __init__(self, weight: int) -> None:
+    def __init__(self, weight):
         self.weight = weight
 
 
