@@ -98,6 +98,33 @@ def test_flying_robot_do_not_use_mutable_as_default():
     assert robot_2.coords == [0, 0, 0]
 
 
+@pytest.mark.parametrize(
+    "args,result",
+    [
+        (
+            ("John", 50, 30, None),
+            ("John", 50, 30, None, [0, 0, 0])
+        ),
+        (
+            ("Michael", 30, 20, None, [10, 1, 100]),
+            ("Michael", 30, 20, None, [10, 1, 100])
+        )
+    ]
+)
+def test_deliver_robot_has_attrs(args, result):
+    robot = DeliveryDrone(*args)
+    assert all([
+        hasattr(robot, attr)
+        for attr in [
+            "name", "weight", "max_load_weight", "current_load", "coords"
+        ]
+    ])
+    assert (
+               robot.name, robot.weight, robot.max_load_weight,
+               robot.current_load, robot.coords
+           ) == result
+
+
 def test_deliver_robot_hook_load_cargo_is_not_heavy():
     cargo = Cargo(20)
     drone = DeliveryDrone(
