@@ -63,7 +63,7 @@ drone.current_load is cargo
 ```python
 drone = DeliveryDrone(name="Jack", 
                       weight=9, 
-                      max_weight_load=30, 
+                      max_load_weight=30, 
                       current_load=Cargo(20))
 drone.unhook_load()
 drone.current_load is None
