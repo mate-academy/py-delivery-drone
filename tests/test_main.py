@@ -284,6 +284,12 @@ def test_removed_comment():
                  "weight": int,
                  "max_load_weight": int,
                  "current_load": Cargo | NoneType,
+                 "return": NoneType} |
+                {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "max_load_weight": int,
+                 "current_load": Cargo,
                  "return": NoneType}
         ),
         (
