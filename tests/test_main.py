@@ -1,5 +1,3 @@
-from types import NoneType
-
 import pytest
 import ast
 import inspect
@@ -240,23 +238,23 @@ def test_removed_comment():
                 {"coords": typing.Optional[list[int]],
                  "name": str,
                  "weight": int,
-                 "return": NoneType}
+                 "return": type(None)}
         ),
         (
                 BaseRobot.go_forward,
-                {"step": int, "return": NoneType}
+                {"step": int, "return": type(None)}
         ),
         (
                 BaseRobot.go_back,
-                {"step": int, "return": NoneType}
+                {"step": int, "return": type(None)}
         ),
         (
                 BaseRobot.go_left,
-                {"step": int, "return": NoneType}
+                {"step": int, "return": type(None)}
         ),
         (
                 BaseRobot.go_right,
-                {"step": int, "return": NoneType}
+                {"step": int, "return": type(None)}
         ),
         (
                 BaseRobot.get_info,
@@ -267,15 +265,15 @@ def test_removed_comment():
                 {"coords": typing.Optional[list[int]],
                  "name": str,
                  "weight": int,
-                 "return": NoneType}
+                 "return": type(None)}
         ),
         (
                 FlyingRobot.go_down,
-                {"step": int, "return": NoneType}
+                {"step": int, "return": type(None)}
         ),
         (
                 FlyingRobot.go_up,
-                {"step": int, "return": NoneType}
+                {"step": int, "return": type(None)}
         ),
         (
                 DeliveryDrone.__init__,
@@ -283,20 +281,25 @@ def test_removed_comment():
                  "name": str,
                  "weight": int,
                  "max_load_weight": int,
-                 "current_load": Cargo | NoneType,
-                 "return": NoneType}
+                 "current_load": Cargo | type(None),
+                 "return": type(None)} |
+                {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "max_load_weight": int,
+                 "current_load": Cargo,
+                 "return": type(None)}
         ),
         (
                 DeliveryDrone.hook_load,
-                {"cargo": Cargo, "return": NoneType}
+                {"cargo": Cargo, "return": type(None)}
         ),
         (
                 DeliveryDrone.unhook_load,
-                {} | {"return": NoneType}
+                {} | {"return": type(None)}
         ),
     ]
 )
 def test_added_type_annotation(function: Callable, result: dict) -> None:
     hints = typing.get_type_hints(function)
     assert dict(hints) == result, "Add or fix type annotation for methods"
-
