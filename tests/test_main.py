@@ -303,4 +303,3 @@ def test_removed_comment():
 def test_added_type_annotation(function: Callable, result: dict) -> None:
     hints = typing.get_type_hints(function)
     assert dict(hints) == result, "Add or fix type annotation for methods"
-
