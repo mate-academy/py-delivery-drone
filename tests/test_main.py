@@ -238,6 +238,10 @@ def test_removed_comment():
                 {"coords": typing.Optional[list[int]],
                  "name": str,
                  "weight": int,
+                 "return": type(None)} |
+                {"coords": typing.Optional[list],
+                 "name": str,
+                 "weight": int,
                  "return": type(None)}
         ),
         (
@@ -265,6 +269,10 @@ def test_removed_comment():
                 {"coords": typing.Optional[list[int]],
                  "name": str,
                  "weight": int,
+                 "return": type(None)} |
+                {"coords": typing.Optional[list],
+                 "name": str,
+                 "weight": int,
                  "return": type(None)}
         ),
         (
@@ -284,6 +292,18 @@ def test_removed_comment():
                  "current_load": Cargo | type(None),
                  "return": type(None)} |
                 {"coords": typing.Optional[list[int]],
+                 "name": str,
+                 "weight": int,
+                 "max_load_weight": int,
+                 "current_load": Cargo,
+                 "return": type(None)} |
+                {"coords": typing.Optional[list],
+                 "name": str,
+                 "weight": int,
+                 "max_load_weight": int,
+                 "current_load": Cargo | type(None),
+                 "return": type(None)} |
+                {"coords": typing.Optional[list],
                  "name": str,
                  "weight": int,
                  "max_load_weight": int,
