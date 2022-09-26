@@ -43,7 +43,7 @@ def test_base_robot_go():
 def test_base_robot_do_not_use_mutable_as_default():
     robot_1 = BaseRobot("", 1)
     robot_2 = BaseRobot("", 1)
-    robot_1.go_forward(1)
+    robot_1.go_left(1)
     assert robot_2.coords == [0, 0]
 
 
@@ -241,7 +241,7 @@ def test_removed_comment():
                  "return": type(None)}
         ),
         (
-                BaseRobot.go_forward,
+                BaseRobot.go_left,
                 {"step": int, "return": type(None)}
         ),
         (
