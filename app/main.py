@@ -1,13 +1,13 @@
-from typing import Union, List
-
-
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: List[int] = None) -> None:
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: list[int] = None) -> None:
         self.name = name
         self.weight = weight
         self.coords = [0, 0] if coords is None else coords
@@ -29,7 +29,10 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: (List[int]) = None) -> None:
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: list[int] = None) -> None:
         super().__init__(name=name, weight=weight)
         self.coords = [0, 0, 0] if coords is None else coords
 
@@ -45,7 +48,7 @@ class DeliveryDrone(FlyingRobot):
                  name: str,
                  weight: int,
                  max_load_weight: int,
-                 coords: list = None,
+                 coords: list[int] = None,
                  current_load: int = None,
                  ) -> None:
         super().__init__(name=name, weight=weight, coords=coords)
@@ -58,9 +61,3 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
-
-robot = BaseRobot(name="Walle", weight=34)
-robot.go_forward()
-print(robot.coords)
-robot.go_right(5)
-print(robot.coords)
