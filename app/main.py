@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
