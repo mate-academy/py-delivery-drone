@@ -1,8 +1,5 @@
-import copy
-
-
 class Cargo:
-    def __init__(self, weight):
+    def __init__(self, weight: int) -> None:
         self.weight = weight
 
 
@@ -14,10 +11,7 @@ class BaseRobot:
 
         self.name = name
         self.weight = weight
-        if coords:
-            self.coords = coords
-        else:
-            self.coords = [0, 0]
+        self.coords = coords if coords else [0, 0]
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -41,10 +35,8 @@ class FlyingRobot(BaseRobot):
                  weight: int,
                  coords: list[int] = None) -> None:
 
-        if coords:
-            super().__init__(name, weight, coords)
-        else:
-            super().__init__(name, weight, [0, 0, 0])
+        coords = coords if coords else [0, 0, 0]
+        super().__init__(name, weight, coords)
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -67,7 +59,7 @@ class DeliveryDrone(FlyingRobot):
 
     def hook_load(self, cargo: Cargo) -> None:
         if not self.current_load and cargo.weight <= self.max_load_weight:
-            self.current_load = copy.deepcopy(cargo)
+            self.current_load = cargo
 
     def unhook_load(self) -> None:
         self.current_load = None
