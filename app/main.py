@@ -1,4 +1,4 @@
-from typing import List
+from __future__ import annotations
 
 
 class Cargo:
@@ -8,7 +8,7 @@ class Cargo:
 
 class BaseRobot(Cargo):
     def __init__(
-            self, name: str, weight: int, coords: List[int] = None
+            self, name: str, weight: int, coords: list[int] | None = None
     ) -> None:
         self.name = name
         self.weight = weight
@@ -32,7 +32,7 @@ class BaseRobot(Cargo):
 
 class FlyingRobot(BaseRobot):
     def __init__(
-            self, name: str, weight: int, coords: List[int] = None
+            self, name: str, weight: int, coords: list[int] | None = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.coords = [0, 0, 0] if coords is None else coords
@@ -48,7 +48,7 @@ class DeliveryDrone(FlyingRobot):
     def __init__(
             self, name: str, weight: int,
             max_load_weight: int, current_load: Cargo,
-            coords: List[int] = None,
+            coords: list[int] | None = None,
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
@@ -58,5 +58,5 @@ class DeliveryDrone(FlyingRobot):
         if self.current_load is None and cargo.weight <= self.max_load_weight:
             self.current_load = cargo
 
-    def unhook_load(self):
+    def unhook_load(self) -> None:
         self.current_load = None
