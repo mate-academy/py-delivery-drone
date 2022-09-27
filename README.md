@@ -17,9 +17,10 @@ take a `step` argument (1 by default) and move the robot by
 `step` in the appropriate direction.
 Positive Y axis is forward, positive X axis is right.
 - `get_info` method returns a string in the next format `Robot: {name}, Weight: {weight}`
+
 ```python
 robot = BaseRobot(name="Walle", weight=34, coords=[3, -2])
-robot.go_forward()
+robot.go_left()
 robot.coords == [3, -1]
 robot.go_right(5)
 robot.coords == [8, -1]
