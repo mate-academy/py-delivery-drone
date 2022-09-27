@@ -101,26 +101,32 @@ def test_flying_robot_do_not_use_mutable_as_default():
 
 
 @pytest.mark.parametrize(
-    "args,result",
+    "kwargs,result",
     [
         (
-            ("John", 50, 30, None),
+            {
+                "name": "John", "weight": 50,
+                "max_load_weight": 30, "current_load": None
+            },
             ("John", 50, 30, None, [0, 0, 0])
         ),
         (
-            ("Michael", 30, 20, None, [10, 1, 100]),
+            {
+                "name": "Michael", "weight": 30, "max_load_weight": 20,
+                "current_load": None, "coords": [10, 1, 100]
+            },
             ("Michael", 30, 20, None, [10, 1, 100])
         )
     ]
 )
-def test_deliver_robot_has_attrs(args, result):
-    robot = DeliveryDrone(*args)
-    assert all([
+def test_deliver_robot_has_attrs(kwargs, result):
+    robot = DeliveryDrone(**kwargs)
+    assert all(
         hasattr(robot, attr)
         for attr in [
             "name", "weight", "max_load_weight", "current_load", "coords"
         ]
-    ])
+    )
     assert (
                robot.name, robot.weight, robot.max_load_weight,
                robot.current_load, robot.coords
@@ -228,78 +234,3 @@ def test_removed_comment():
         file_content = file.read()
         assert "# write your code here" not in file_content, ("You have to"
                " remove the unnecessary comment '# write your code here'")
-
-
-@pytest.mark.parametrize(
-    "function,result",
-    [
-        (
-                BaseRobot.__init__,
-                {"coords": typing.Optional[list[int]],
-                 "name": str,
-                 "weight": int,
-                 "return": type(None)}
-        ),
-        (
-                BaseRobot.go_forward,
-                {"step": int, "return": type(None)}
-        ),
-        (
-                BaseRobot.go_back,
-                {"step": int, "return": type(None)}
-        ),
-        (
-                BaseRobot.go_left,
-                {"step": int, "return": type(None)}
-        ),
-        (
-                BaseRobot.go_right,
-                {"step": int, "return": type(None)}
-        ),
-        (
-                BaseRobot.get_info,
-                {} | {"return": str}
-        ),
-        (
-                FlyingRobot.__init__,
-                {"coords": typing.Optional[list[int]],
-                 "name": str,
-                 "weight": int,
-                 "return": type(None)}
-        ),
-        (
-                FlyingRobot.go_down,
-                {"step": int, "return": type(None)}
-        ),
-        (
-                FlyingRobot.go_up,
-                {"step": int, "return": type(None)}
-        ),
-        (
-                DeliveryDrone.__init__,
-                {"coords": typing.Optional[list[int]],
-                 "name": str,
-                 "weight": int,
-                 "max_load_weight": int,
-                 "current_load": Cargo | type(None),
-                 "return": type(None)} |
-                {"coords": typing.Optional[list[int]],
-                 "name": str,
-                 "weight": int,
-                 "max_load_weight": int,
-                 "current_load": Cargo,
-                 "return": type(None)}
-        ),
-        (
-                DeliveryDrone.hook_load,
-                {"cargo": Cargo, "return": type(None)}
-        ),
-        (
-                DeliveryDrone.unhook_load,
-                {} | {"return": type(None)}
-        ),
-    ]
-)
-def test_added_type_annotation(function: Callable, result: dict) -> None:
-    hints = typing.get_type_hints(function)
-    assert dict(hints) == result, "Add or fix type annotation for methods"
