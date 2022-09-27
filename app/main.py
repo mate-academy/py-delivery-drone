@@ -5,7 +5,8 @@ class Cargo:
 
 class BaseRobot:
     def __init__(
-            self, name: str,
+            self,
+            name: str,
             weight: int,
             coords: list[int] = None
     ) -> None:
@@ -31,7 +32,8 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
     def __init__(
-            self, name: str,
+            self,
+            name: str,
             weight: int,
             coords: list[int] = None
     ) -> None:
@@ -47,7 +49,8 @@ class FlyingRobot(BaseRobot):
 
 class DeliveryDrone(FlyingRobot):
     def __init__(
-            self, name: str,
+            self,
+            name: str,
             weight: int,
             max_load_weight: int,
             current_load: Cargo,
