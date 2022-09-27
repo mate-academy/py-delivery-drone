@@ -101,26 +101,32 @@ def test_flying_robot_do_not_use_mutable_as_default():
 
 
 @pytest.mark.parametrize(
-    "args,result",
+    "kwargs,result",
     [
         (
-            ("John", 50, 30, None),
+            {
+                "name": "John", "weight": 50,
+                "max_load_weight": 30, "current_load": None
+            },
             ("John", 50, 30, None, [0, 0, 0])
         ),
         (
-            ("Michael", 30, 20, None, [10, 1, 100]),
+            {
+                "name": "Michael", "weight": 30, "max_load_weight": 20,
+                "current_load": None, "coords": [10, 1, 100]
+            },
             ("Michael", 30, 20, None, [10, 1, 100])
         )
     ]
 )
-def test_deliver_robot_has_attrs(args, result):
-    robot = DeliveryDrone(*args)
-    assert all([
+def test_deliver_robot_has_attrs(kwargs, result):
+    robot = DeliveryDrone(**kwargs)
+    assert all(
         hasattr(robot, attr)
         for attr in [
             "name", "weight", "max_load_weight", "current_load", "coords"
         ]
-    ])
+    )
     assert (
                robot.name, robot.weight, robot.max_load_weight,
                robot.current_load, robot.coords
