@@ -234,4 +234,3 @@ def test_removed_comment():
         file_content = file.read()
         assert "# write your code here" not in file_content, ("You have to"
                " remove the unnecessary comment '# write your code here'")
-        
