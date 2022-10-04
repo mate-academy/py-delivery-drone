@@ -5,10 +5,10 @@ class Cargo:
 
 class BaseRobot:
     def __init__(
-                 self,
-                 name: str,
-                 weight: int,
-                 coords=None
+            self,
+            name: str,
+            weight: int,
+            coords=None
     ):
 
         if coords is None:
