@@ -1,10 +1,8 @@
 import pytest
 import ast
 import inspect
-import typing
-from typing import Callable
 
-from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
+from app import main
 
 
 @pytest.mark.parametrize(
@@ -15,13 +13,13 @@ from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
     ]
 )
 def test_base_robot_has_attrs(args, result):
-    robot = BaseRobot(*args)
+    robot = main.BaseRobot(*args)
     assert all([hasattr(robot, attr) for attr in ["name", "weight", "coords"]])
     assert (robot.name, robot.weight, robot.coords) == result
 
 
 def test_base_robot_go():
-    robot = BaseRobot("Michael", 40)
+    robot = main.BaseRobot("Michael", 40)
     robot.go_forward(4)
     assert robot.coords == [0, 4]
     robot.go_forward()
@@ -41,19 +39,19 @@ def test_base_robot_go():
 
 
 def test_base_robot_do_not_use_mutable_as_default():
-    robot_1 = BaseRobot("", 1)
-    robot_2 = BaseRobot("", 1)
+    robot_1 = main.BaseRobot("", 1)
+    robot_2 = main.BaseRobot("", 1)
     robot_1.go_forward(1)
     assert robot_2.coords == [0, 0]
 
 
 def test_base_robot_get_info_method():
-    robot = BaseRobot("Michael", 40)
+    robot = main.BaseRobot("Michael", 40)
     assert robot.get_info() == "Robot: Michael, Weight: 40"
 
 
 def test_flying_robot_go():
-    robot = FlyingRobot("Michael", 40)
+    robot = main.FlyingRobot("Michael", 40)
     robot.go_forward(4)
     assert robot.coords == [0, 4, 0]
     robot.go_forward()
@@ -88,14 +86,14 @@ def test_flying_robot_go():
     ]
 )
 def test_flying_robot_has_attrs(args, result):
-    robot = FlyingRobot(*args)
+    robot = main.FlyingRobot(*args)
     assert all([hasattr(robot, attr) for attr in ["name", "weight", "coords"]])
     assert (robot.name, robot.weight, robot.coords) == result
 
 
 def test_flying_robot_do_not_use_mutable_as_default():
-    robot_1 = FlyingRobot("", 1)
-    robot_2 = FlyingRobot("", 1)
+    robot_1 = main.FlyingRobot("", 1)
+    robot_2 = main.FlyingRobot("", 1)
     robot_1.go_up(1)
     assert robot_2.coords == [0, 0, 0]
 
@@ -120,7 +118,7 @@ def test_flying_robot_do_not_use_mutable_as_default():
     ]
 )
 def test_deliver_robot_has_attrs(kwargs, result):
-    robot = DeliveryDrone(**kwargs)
+    robot = main.DeliveryDrone(**kwargs)
     assert all(
         hasattr(robot, attr)
         for attr in [
@@ -134,32 +132,32 @@ def test_deliver_robot_has_attrs(kwargs, result):
 
 
 def test_deliver_robot_hook_load_cargo_is_not_heavy():
-    cargo = Cargo(20)
-    drone = DeliveryDrone(
+    cargo = main.Cargo(20)
+    drone = main.DeliveryDrone(
         name="Mike",
         weight=12,
         max_load_weight=30,
         current_load=None,
     )
     drone.hook_load(cargo)
-    assert isinstance(drone.current_load, Cargo)
+    assert isinstance(drone.current_load, main.Cargo)
 
 
 def test_deliver_robot_hook_load_cargo_equals_max_load_weight():
-    cargo = Cargo(20)
-    drone = DeliveryDrone(
+    cargo = main.Cargo(20)
+    drone = main.DeliveryDrone(
         name="Mike",
         weight=12,
         max_load_weight=20,
         current_load=None,
     )
     drone.hook_load(cargo)
-    assert isinstance(drone.current_load, Cargo)
+    assert isinstance(drone.current_load, main.Cargo)
 
 
 def test_deliver_robot_hook_load_cargo_is_too_heavy():
-    cargo = Cargo(50)
-    drone = DeliveryDrone(
+    cargo = main.Cargo(50)
+    drone = main.DeliveryDrone(
         name="Mike",
         weight=12,
         max_load_weight=30,
@@ -170,9 +168,9 @@ def test_deliver_robot_hook_load_cargo_is_too_heavy():
 
 
 def test_deliver_robot_hook_load_cargo_current_load_isnt_none():
-    cargo = Cargo(20)
-    cargo2 = Cargo(12)
-    drone = DeliveryDrone(
+    cargo = main.Cargo(20)
+    cargo2 = main.Cargo(12)
+    drone = main.DeliveryDrone(
         name="Mike",
         weight=12,
         max_load_weight=30,
@@ -183,11 +181,11 @@ def test_deliver_robot_hook_load_cargo_current_load_isnt_none():
 
 
 def test_deliver_robot_unhook_load():
-    drone = DeliveryDrone(
+    drone = main.DeliveryDrone(
         name="Mike",
         weight=12,
         max_load_weight=30,
-        current_load=Cargo(12),
+        current_load=main.Cargo(12),
     )
     drone.unhook_load()
     assert drone.current_load is None
@@ -196,8 +194,8 @@ def test_deliver_robot_unhook_load():
 @pytest.mark.parametrize(
     "class_,parent",
     [
-        (FlyingRobot, "BaseRobot"),
-        (DeliveryDrone, "FlyingRobot"),
+        (main.FlyingRobot, "BaseRobot"),
+        (main.DeliveryDrone, "FlyingRobot"),
     ],
 )
 def test_inheritance_of_flying_and_delivery(
@@ -213,8 +211,8 @@ def test_inheritance_of_flying_and_delivery(
 @pytest.mark.parametrize(
     "class_,methods,length",
     [
-        (FlyingRobot, ["__init__", "go_up", "go_down"], 3),
-        (DeliveryDrone, ["__init__", "hook_load", "unhook_load"], 3)
+        (main.FlyingRobot, ["__init__", "go_up", "go_down"], 3),
+        (main.DeliveryDrone, ["__init__", "hook_load", "unhook_load"], 3)
     ]
 )
 def test_methods_declared_in_inherited_classes(class_, methods, length):
@@ -229,9 +227,6 @@ def test_methods_declared_in_inherited_classes(class_, methods, length):
 
 
 def test_removed_comment():
-    import app
-    with open(app.main.__file__, "r") as file:
-        file_content = file.read()
-        assert "# write your code here" not in file_content, ("You have to"
-               " remove the unnecessary comment '# write your code here'")
-        
+    lines = inspect.getsource(main)
+    assert "# write your code here" not in lines, ("You have to"
+        " remove the unnecessary comment '# write your code here'")
