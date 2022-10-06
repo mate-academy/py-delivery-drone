@@ -104,18 +104,18 @@ def test_flying_robot_do_not_use_mutable_as_default():
     "kwargs,result",
     [
         (
-            {
-                "name": "John", "weight": 50,
-                "max_load_weight": 30, "current_load": None
-            },
-            ("John", 50, 30, None, [0, 0, 0])
+                {
+                    "name": "John", "weight": 50,
+                    "max_load_weight": 30, "current_load": None
+                },
+                ("John", 50, 30, None, [0, 0, 0])
         ),
         (
-            {
-                "name": "Michael", "weight": 30, "max_load_weight": 20,
-                "current_load": None, "coords": [10, 1, 100]
-            },
-            ("Michael", 30, 20, None, [10, 1, 100])
+                {
+                    "name": "Michael", "weight": 30, "max_load_weight": 20,
+                    "current_load": None, "coords": [10, 1, 100]
+                },
+                ("Michael", 30, 20, None, [10, 1, 100])
         )
     ]
 )
@@ -201,7 +201,7 @@ def test_deliver_robot_unhook_load():
     ],
 )
 def test_inheritance_of_flying_and_delivery(
-    class_, parent
+        class_, parent
 ):
     class_source = inspect.getsource(class_)
     parsed_class = ast.parse(class_source)
@@ -233,5 +233,4 @@ def test_removed_comment():
     with open(app.main.__file__, "r") as file:
         file_content = file.read()
         assert "# write your code here" not in file_content, ("You have to"
-               " remove the unnecessary comment '# write your code here'")
-        
+                                                              " remove the unnecessary comment '# write your code here'")
