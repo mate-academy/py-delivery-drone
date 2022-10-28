@@ -4,38 +4,50 @@ class Cargo:
 
 
 class BaseRobot(Cargo):
-    def __init__(self, name: str, weight: int, coords: list = (0, 0)) -> None:
+    def __init__(self, name: str, weight: int, coords: None) -> None:
         super().__init__(weight)
         self.name = name
-        self.coords = coords
+        self.weight = weight
+        self.coords = [0, 0] if coords is None else coords
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
-        tuple(self.coords)
 
     def go_back(self, step: int = 1) -> None:
-        list(self.coords)
         self.coords[1] -= step
-        tuple(self.coords)
 
     def go_right(self, step: int = 1) -> None:
-        list(self.coords)
         self.coords[0] += step
-        tuple(self.coords)
 
     def go_left(self, step: int = 1) -> None:
-        list(self.coords)
         self.coords[0] -= step
-        tuple(self.coords)
 
-class FlyingRobot(Cargo):
-    def __init__(self):
-robot = BaseRobot(name="Walle", weight=34, coords=[3, -2])
-robot.go_forward()
-print(robot.coords)
-robot.go_right(5)
-print(robot.coords)
-robot.go_left(1)
-print(robot.coords)
-robot.go_back()
-print(robot.coords)
+    def get_info(self) -> None:
+        print(f"Robot: {self.name}, Weight: {self.weight}")
+
+
+class FlyingRobot(BaseRobot):
+    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+        super().__init__(name, weight, coords)
+        self.coords = [0, 0, 0] if not coords else self.coords
+
+    def go_up(self, point: int) -> None:
+        self.coords[2] += point
+
+    def go_down(self, point: int) -> None:
+        self.coords[2] -= point
+
+
+class DeliveryDrone(FlyingRobot):
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: list = None,
+                 max_load_weight: int = None,
+                 current_load: (int, bool) = None) -> None:
+
+        super().__init__(name,
+                         weight,
+                         coords)
+        self.max_load_weight = max_load_weight
+        self.current_load = current_load
