@@ -15,13 +15,10 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        self.coords = []
         if coords is None:
-            self.coords.append(0)
-            self.coords.append(0)
+            self.coords = [0, 0]
         else:
-            self.coords.append(coords[0])
-            self.coords.append(coords[1])
+            self.coords = [coords[0], coords[1]]
 
     def go_forward(self, step: float = 1) -> None:
         self.coords[1] += step
@@ -47,15 +44,10 @@ class FlyingRobot(BaseRobot):
             coords: list = None
     ) -> None:
 
-        coords_xyz = []
         if coords is None:
-            coords_xyz.append(0)
-            coords_xyz.append(0)
-            coords_xyz.append(0)
+            coords_xyz = [0, 0, 0]
         else:
-            coords_xyz.append(coords[0])
-            coords_xyz.append(coords[1])
-            coords_xyz.append(coords[2])
+            coords_xyz = [coords[0], coords[1], coords[2]]
 
         super().__init__(
             name,
@@ -82,15 +74,10 @@ class DeliveryDrone(FlyingRobot):
             coords: list = None,
     ) -> None:
 
-        coords_xyz = []
         if coords is None:
-            coords_xyz.append(0)
-            coords_xyz.append(0)
-            coords_xyz.append(0)
+            coords_xyz = [0, 0, 0]
         else:
-            coords_xyz.append(coords[0])
-            coords_xyz.append(coords[1])
-            coords_xyz.append(coords[2])
+            coords_xyz = [coords[0], coords[1], coords[2]]
 
         super().__init__(
             name,
