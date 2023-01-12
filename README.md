@@ -21,9 +21,9 @@ Positive Y axis is forward, positive X axis is right.
 ```python
 robot = BaseRobot(name="Walle", weight=34, coords=[3, -2])
 robot.go_forward()
-robot.coordsi == [3, -1]
+robot.coords == [3, -1]
 robot.go_right(5)
-robot.coordsi == [8, -1]
+robot.coords == [8, -1]
 ```
 
 **FlyingRobot**
@@ -38,7 +38,7 @@ use condition to send right coords to parent's constructor
 ```python
 flying_robot = FlyingRobot(name="Mike", weight=11)
 flying_robot.go_up(10)
-flying_robot.coordsi = [0, 0, 10]
+flying_robot.coords = [0, 0, 10]
 ```
 
 **DeliveryDrone**

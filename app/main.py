@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Union
+from typing import Optional
 
 
 class Cargo:
@@ -12,7 +12,7 @@ class BaseRobot:
             self: BaseRobot,
             name: str,
             weight: int,
-            coords: Union[None, list] = None
+            coords: Optional[list] = None
     ) -> None:
         coords = [0, 0] if coords is None else coords
         self.name = name
@@ -40,7 +40,7 @@ class FlyingRobot(BaseRobot):
             self: FlyingRobot,
             name: str,
             weight: int,
-            coords: Union[None, list] = None
+            coords: Optional[list] = None
     ) -> None:
         coords = [0, 0, 0] if coords is None else coords
         super().__init__(name, weight, coords)
@@ -58,8 +58,8 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int,
-            current_load: Union[None, Cargo],
-            coords: Union[None, list] = None
+            current_load: Optional[list],
+            coords: Optional[list] = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
