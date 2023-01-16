@@ -12,29 +12,29 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        self.coords = [0, 0] if coords is None else coords
+        self.coords = coords or [0, 0]
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
-    def go_forward(self, step: int = 1) -> list:
+    def go_forward(self, step: int = 1) -> list[int]:
         one_step_move = self.coords
-        one_step_move[1] += 1 if step is None else step
+        one_step_move[1] += step
         return one_step_move
 
-    def go_back(self, step: int = 1) -> list:
+    def go_back(self, step: int = 1) -> list[int]:
         one_step_move = self.coords
-        one_step_move[1] -= 1 if step is None else step
+        one_step_move[1] -= step
         return one_step_move
 
-    def go_right(self, step: int = 1) -> list:
+    def go_right(self, step: int = 1) -> list[int]:
         one_step_move = self.coords
-        one_step_move[0] += 1 if step is None else step
+        one_step_move[0] += step
         return one_step_move
 
-    def go_left(self, step: int = 1) -> list:
+    def go_left(self, step: int = 1) -> list[int]:
         one_step_move = self.coords
-        one_step_move[0] -= 1 if step is None else step
+        one_step_move[0] -= step
         return one_step_move
 
 
@@ -46,16 +46,16 @@ class FlyingRobot(BaseRobot):
             coords: list = None
     ) -> None:
         super().__init__(name, weight)
-        self.coords = [0, 0, 0] if coords is None else coords
+        self.coords = coords or [0, 0, 0]
 
-    def go_up(self, step: int = 1) -> list:
+    def go_up(self, step: int = 1) -> list[int]:
         one_step_move = self.coords
-        one_step_move[2] += 1 if step is None else step
+        one_step_move[2] += step
         return one_step_move
 
-    def go_down(self, step: int = 1) -> list:
+    def go_down(self, step: int = 1) -> list[int]:
         one_step_move = self.coords
-        one_step_move[2] -= 1 if step is None else step
+        one_step_move[2] -= step
         return one_step_move
 
 
