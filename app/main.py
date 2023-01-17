@@ -46,6 +46,7 @@ class FlyingRobot(BaseRobot):
     def go_down(self, step: int = 1) -> None:
         self.coords[2] -= step
 
+
 class DeliveryDrone(FlyingRobot):
     def __init__(
             self,
