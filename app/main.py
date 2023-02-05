@@ -8,22 +8,22 @@ class BaseRobot:
             self,
             name: str,
             weight: int,
-            coords: list = None
+            coords: list[int, int] = None
     ) -> None:
         self.name = name
         self.weight = weight
-        self.coords = [0, 0] if coords is None else coords
+        self.coords = coords or [0, 0]
 
-    def go_forward(self, step: int = 1) -> list:
+    def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
 
-    def go_back(self, step: int = 1) -> list:
+    def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
 
-    def go_right(self, step: int = 1) -> list:
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
 
-    def go_left(self, step: int = 1) -> list:
+    def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
     def get_info(self) -> str:
@@ -40,11 +40,11 @@ class FlyingRobot(BaseRobot):
         coords = [0, 0, 0] if coords is None else coords
         super().__init__(name, weight, coords)
 
-    def go_up(self, z_index: int = 1) -> list:
-        self.coords[2] += z_index
+    def go_up(self, step: int = 1) -> list:
+        self.coords[2] += step
 
-    def go_down(self, z_index: int = 1) -> list:
-        self.coords[2] -= z_index
+    def go_down(self, step: int = 1) -> list:
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
