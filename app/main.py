@@ -13,19 +13,19 @@ class BaseRobot:
         self.coords = coords if coords else [0, 0]
 
     def go_forward(self, step: int = 1) -> BaseRobot:
-        self.coords[1] += step.real
+        self.coords[1] += step
         return self
 
     def go_right(self, step: int = 1) -> BaseRobot:
-        self.coords[0] += step.real
+        self.coords[0] += step
         return self
 
     def go_back(self, step: int = 1) -> BaseRobot:
-        self.coords[1] -= step.real
+        self.coords[1] -= step
         return self
 
     def go_left(self, step: int = 1) -> BaseRobot:
-        self.coords[0] -= step.real
+        self.coords[0] -= step
         return self
 
     def get_info(self) -> str:
@@ -38,11 +38,11 @@ class FlyingRobot(BaseRobot):
         self.coords = coords if coords else [0, 0, 0]
 
     def go_up(self, other: int = 1) -> BaseRobot:
-        self.coords[2] += other.real
+        self.coords[2] += other
         return self
 
     def go_down(self, other: int = 1) -> BaseRobot:
-        self.coords[2] -= other.real
+        self.coords[2] -= other
         return self
 
 
