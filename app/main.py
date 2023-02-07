@@ -27,12 +27,11 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
-        super().__init__(name, weight, coords)
+        super().__init__(name, weight)
 
         self.coords = coords or [0, 0, 0]
 
     def go_up(self, coord_z: int = 1) -> None:
-        print(self.coords)
         self.coords[2] += coord_z
 
     def go_down(self, coord_z: int = 1) -> None:
@@ -43,7 +42,8 @@ class DeliveryDrone(FlyingRobot):
     def __init__(
             self,
             name: str,
-            weight: int, coords: list = None,
+            weight: int,
+            coords: list = None,
             max_load_weight: int = 0,
             current_load: classmethod = None) -> None:
         super().__init__(name, weight, coords)
@@ -54,10 +54,6 @@ class DeliveryDrone(FlyingRobot):
         if cls.weight <= self.max_load_weight:
             if self.current_load is None:
                 self.current_load = cls
-            else:
-                print("Sorry, but drone is busy")
-        else:
-            print("Sorry, but weight is so big")
 
     def unhook_load(self) -> None:
         self.current_load = None
