@@ -51,7 +51,7 @@ class DeliveryDrone(FlyingRobot):
                  name: str,
                  weight: int,
                  max_load_weight: int,
-                 current_load: bool | Cargo,
+                 current_load: None | Cargo,
                  coords: list[int, int, int] = None) -> None:
 
         coords = coords if coords else [0, 0, 0]
