@@ -20,11 +20,11 @@ class BaseRobot:
         self.coords[0] += step
         return self.coords
 
-    def go_back(self, step: int = 0) -> list:
+    def go_back(self, step: int = 1) -> list:
         self.coords[1] -= step if step else 1
         return self.coords
 
-    def go_left(self, step: int = 0) -> list:
+    def go_left(self, step: int = 1) -> list:
         self.coords[0] -= step if step else 1
         return self.coords
 
