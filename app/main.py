@@ -42,13 +42,11 @@ class FlyingRobot(BaseRobot):
         if self.coords == [0, 0]:
             self.coords = [0, 0, 0]
 
-    def go_up(self, step: int = 1) -> list:
+    def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
-        return self.coords
 
-    def go_down(self, step: int = 1) -> list:
+    def go_down(self, step: int = 1) -> None:
         self.coords[2] -= step
-        return self.coords
 
 
 class DeliveryDrone(FlyingRobot):
