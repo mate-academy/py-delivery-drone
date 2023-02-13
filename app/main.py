@@ -1,7 +1,7 @@
 class Cargo:
     def __init__(
             self,
-            weight: int | float
+            weight: int
     ) -> None:
         self.weight = weight
 
