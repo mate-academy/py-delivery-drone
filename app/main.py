@@ -44,12 +44,12 @@ class FlyingRobot(BaseRobot):
         super().__init__(name, weight)
         self.coords = [0, 0, 0] if coords is None else coords
 
-    def go_up(self, z_coordinate: int = 0) -> list:
-        self.coords[2] += z_coordinate if z_coordinate else 1
+    def go_up(self, z_coordinate: int = 1) -> list:
+        self.coords[2] += z_coordinate
         return self.coords
 
-    def go_down(self, z_coordinate: int = 0) -> list:
-        self.coords[2] -= z_coordinate if z_coordinate else 1
+    def go_down(self, z_coordinate: int = 1) -> list:
+        self.coords[2] -= z_coordinate
         return self.coords
 
 
