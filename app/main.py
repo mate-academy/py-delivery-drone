@@ -16,21 +16,18 @@ class BaseRobot:
         if self.coords is None:
             self.coords = [0, 0]
 
-    def go_forward(self, step: int = 1) -> list:
+    def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
-        return self.coords
 
-    def go_back(self, step: int = 1) -> list:
+    def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
-        return self.coords
 
-    def go_right(self, step: int = 1) -> list:
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
-        return self.coords
 
-    def go_left(self, step: int = 1) -> list:
+    def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
-        return self.coords
+
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
