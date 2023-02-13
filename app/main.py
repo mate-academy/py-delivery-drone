@@ -5,13 +5,15 @@ class Cargo:
 
 class BaseRobot:
 
-    def __init__(self,
-                 name: str,
-                 weight: int,
-                 coords: list[int | float] = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int | float] = None
+    ) -> None:
         self.name = name
         self.weight = weight
-        self.coords = coords if coords else [0, 0]
+        self.coords = [0, 0] if coords is None else coords
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -31,10 +33,12 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
 
-    def __init__(self,
-                 name: str,
-                 weight: int,
-                 coords: list[int | float] = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int | float] = None
+    ) -> None:
         if coords is None:
             coords = [0, 0, 0]
         super().__init__(name, weight, coords)
@@ -48,18 +52,21 @@ class FlyingRobot(BaseRobot):
 
 class DeliveryDrone(FlyingRobot):
 
-    def __init__(self,
-                 name: str,
-                 weight: int,
-                 coords: list[int | float] = None,
-                 max_load_weight: int = 0,
-                 current_load: Cargo = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int | float] = None,
+            max_load_weight: int = 0,
+            current_load: Cargo = None
+    ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
-        if not self.current_load and cargo.weight <= self.max_load_weight:
+        if (self.current_load is not None
+                and cargo.weight <= self.max_load_weight):
             self.current_load = cargo
 
     def unhook_load(self) -> None:
