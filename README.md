@@ -56,7 +56,7 @@ drone = DeliveryDrone(
     weight=18, 
     coords=[11, -4, 16], 
     max_load_weight=20, 
-    current_load=None
+    current_load=None,
 )
 drone.hook_load(cargo)
 # drone.current_load is cargo
@@ -71,7 +71,7 @@ drone = DeliveryDrone(
     name="Jack", 
     weight=9, 
     max_load_weight=30, 
-    current_load=Cargo(20)
+    current_load=Cargo(20),
 )
 drone.unhook_load()
 # drone.current_load is None
