@@ -41,8 +41,9 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list = None
     ) -> None:
-        super().__init__(name, weight, coords)
-        self.coords = [0, 0, 0] if coords is None else coords
+        super().__init__(name, weight)
+        self.coords = [0, 0, 0] \
+            if coords is None or len(coords) != 3 else coords
 
     def go_up(self, up: int = 1) -> None:
         self.coords[2] += up
@@ -70,3 +71,7 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
+
+
+fly = FlyingRobot("asd", 12, [0, 0])
+print(fly.coords)
