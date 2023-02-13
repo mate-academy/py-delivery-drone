@@ -20,9 +20,9 @@ Positive Y axis is forward, positive X axis is right.
 ```python
 robot = BaseRobot(name="Walle", weight=34, coords=[3, -2])
 robot.go_forward()
-robot.coords == [3, -1]
+# robot.coords == [3, -1]
 robot.go_right(5)
-robot.coords == [8, -1]
+# robot.coords == [8, -1]
 ```
 
 **FlyingRobot**
@@ -36,7 +36,7 @@ use condition to send right coords to parent's constructor
 ```python
 flying_robot = FlyingRobot(name="Mike", weight=11)
 flying_robot.go_up(10)
-flying_robot.coords = [0, 0, 10]
+# flying_robot.coords = [0, 0, 10]
 ```
 
 **DeliveryDrone**
@@ -51,21 +51,28 @@ to the parent's constructor.
 - has `unhook_load` method, that set `current_load` to None
 ```python
 cargo = Cargo(14)
-drone = DeliveryDrone(name="Jim", weight=18, coords=[11, -4, 16], 
-                      max_load_weight=20, current_load=None)
+drone = DeliveryDrone(
+    name="Jim", 
+    weight=18, 
+    coords=[11, -4, 16], 
+    max_load_weight=20, 
+    current_load=None
+)
 drone.hook_load(cargo)
-drone.current_load is cargo
+# drone.current_load is cargo
 
 cargo2 = Cargo(2)
 drone.hook_load(cargo2)
-drone.current_load is cargo  
+# drone.current_load is cargo  
 # didn't hook cargo2, cargo already in current load
 ```
 ```python
-drone = DeliveryDrone(name="Jack", 
-                      weight=9, 
-                      max_load_weight=30, 
-                      current_load=Cargo(20))
+drone = DeliveryDrone(
+    name="Jack", 
+    weight=9, 
+    max_load_weight=30, 
+    current_load=Cargo(20)
+)
 drone.unhook_load()
-drone.current_load is None
+# drone.current_load is None
 ```
