@@ -48,7 +48,6 @@ class FlyingRobot(BaseRobot):
 
 
 class DeliveryDrone(FlyingRobot):
-
     def __init__(
             self,
             name: str,
