@@ -71,7 +71,3 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
-
-
-fly = FlyingRobot("asd", 12, [0, 0])
-print(fly.coords)
