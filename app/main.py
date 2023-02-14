@@ -63,7 +63,7 @@ class DeliveryDrone(FlyingRobot):
         super().__init__(
             name,
             weight,
-            coords=coords if coords else [0, 0, 0]
+            coords
         )
 
     def hook_load(self, cargo: Cargo) -> None:
