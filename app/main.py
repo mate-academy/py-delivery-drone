@@ -72,10 +72,3 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
-
-
-drone1 = DeliveryDrone(name="Jim",
-                       weight=18,
-                       coords=[1],
-                       max_load_weight=20,
-                       current_load=None)
