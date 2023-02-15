@@ -8,7 +8,7 @@ class BaseRobot:
             self,
             name: str,
             weight: int,
-            coords: list = None
+            coords: list | None = None
     ) -> None:
         self.name = name
         self.weight = weight
