@@ -7,7 +7,7 @@ Let's implement 3 classes with inheritance
 
 **BaseRobot**
 
-- constructor takes `name`, `weight`, `coords`, 
+- the `__init__` method takes `name`, `weight`, `coords`, 
 and saves them
 - `coords` is list with `x` and `y` coordinates, set to [0, 0] by default.
 It is not a good practice to use mutable object as a default parameter,
@@ -29,9 +29,9 @@ robot.go_right(5)
 
 - inherits from `BaseRobot`
 - takes the same args as BaseRobot and passes them to the 
-parent's constructor (use super)
+parent's `__init__` method (use super)
 - can work with z coordinate, coords by default should be [0, 0, 0], 
-use condition to send right coords to parent's constructor
+use condition to send right coords to parent's `__init__` method
 - has methods `go_up` and `go_down` changing `z`, positive Z axis is up
 ```python
 flying_robot = FlyingRobot(name="Mike", weight=11)
@@ -43,8 +43,8 @@ flying_robot.go_up(10)
 
 - inherits from `FlyingRobot`
 - takes the same args as `FlyingRobot` and passes them 
-to the parent's constructor. 
-- constructor also takes and stores `max_load_weight` and `current_load`.
+to the parent's `__init__` method. 
+- the `__init__` method also takes and stores `max_load_weight` and `current_load`.
 - has `hook_load` method taking `Cargo` object and saves it to
 `current_load` if `current_load` is `None` and `cargo.weight` not greater than
 `max_load_weight` of the drone
