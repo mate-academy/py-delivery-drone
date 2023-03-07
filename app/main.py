@@ -65,4 +65,4 @@ class DeliveryDrone(FlyingRobot):
     def unhook_load(self) -> None:
         self.current_load = None
 
-    # Thank you mentor for your work :)
+# Thank you mentor for your work :)
