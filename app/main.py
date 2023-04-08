@@ -32,7 +32,10 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: Optional[list] = None) -> None:
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: Optional[list] = None) -> None:
         super().__init__(name, weight, coords)
         self.coords = coords or [0, 0, 0]
 
