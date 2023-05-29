@@ -7,7 +7,33 @@ class Cargo:
 
 
 class BaseRobot():
-    pass
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[list[int]] = None
+    ) -> None:
+        self.name = name
+        self.weight = weight
+        self.coords = coords or [0, 0]
+
+    def go(self, axis: int, direction: int, steps: int = 1) -> None:
+        self.coords[axis] += direction * steps
+
+    def go_right(self, steps: int = 1) -> None:
+        self.go(0, 1, steps)
+
+    def go_left(self, steps: int = 1) -> None:
+        self.go(0, -1, steps)
+
+    def go_forward(self, steps: int = 1) -> None:
+        self.go(1, 1, steps)
+
+    def go_back(self, steps: int = 1) -> None:
+        self.go(1, -1, steps)
+
+    def get_info(self) -> str:
+        return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
