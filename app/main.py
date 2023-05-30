@@ -1,4 +1,5 @@
 from typing import Optional
+from typing import Any
 
 
 class Cargo:
@@ -15,8 +16,7 @@ class BaseRobot:
 
         self.name = name
         self.weight = weight
-        if coords is None:
-            coords = [0, 0]
+        coords = coords if coords is not None else [0, 0]
         self.coords = coords
 
     def go_forward(self, step: int = 1) -> None:
@@ -55,11 +55,12 @@ class FlyingRobot(BaseRobot):
 
 class DeliveryDrone(FlyingRobot):
     def __init__(
-            self, name: str,
+            self,
+            name: str,
             weight: float,
             max_load_weight: float,
             current_load: Optional[Cargo] = None,
-            **kwargs
+            **kwargs: Any
     ) -> None:
 
         super().__init__(name, weight, **kwargs)
