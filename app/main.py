@@ -1,19 +1,18 @@
 from __future__ import annotations
 
+from typing import Optional
+
 
 class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = None
+                 coords: Optional[list[str]] = None
                  ) -> None:
         self.name = name
         self.weight = weight
 
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords
+        self.coords = coords or [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -35,7 +34,7 @@ class FlyingRobot(BaseRobot):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = None
+                 coords: Optional[list[str]] = None
                  ) -> None:
         super().__init__(name, weight, coords)
         if coords is None:
@@ -61,7 +60,7 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  max_load_weight: float,
                  current_load: float,
-                 coords: list[int] = None
+                 coords: Optional[list[str]] = None
                  ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
