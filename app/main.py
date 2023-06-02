@@ -7,7 +7,7 @@ class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[] = None) -> None:
+                 coords: list = None) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords or [0, 0]
