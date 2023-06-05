@@ -3,7 +3,7 @@ class Cargo:
         self.weight = weight
 
 
-class BaseRobot():
+class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int,
