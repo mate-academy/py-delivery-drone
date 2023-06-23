@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
@@ -5,7 +8,8 @@ class Cargo:
 
 class BaseRobot:
 
-    def __init__(self, name: str, weight: int, coords: None = None) -> None:
+    def __init__(self, name: str, weight: int,
+                 coords: Optional = None) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords if coords else [0, 0]
@@ -28,7 +32,8 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
 
-    def __init__(self, name: str, weight: int, coords: None = None) -> None:
+    def __init__(self, name: str, weight: int,
+                 coords: Optional = None) -> None:
         super().__init__(name, weight)
         self.coords = coords if coords else [0, 0, 0]
 
@@ -42,7 +47,7 @@ class FlyingRobot(BaseRobot):
 class DeliveryDrone(FlyingRobot):
 
     def __init__(self, name: str, weight: int, max_load_weight: int,
-                 coords: None = None,
+                 coords: Optional = None,
                  current_load: None | Cargo = None) -> None:
         super().__init__(name, weight, coords)
         self.current_load = current_load
