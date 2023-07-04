@@ -4,19 +4,19 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, *args, **kwargs) -> None:
-        self.name = ""
-        self.weight = 0
-        self.coords = [0, 0]
-
-        if len(args) != 0:
-            for index, values_args in enumerate(args):
-                if index == 0:
-                    self.name = values_args
-                if index == 1:
-                    self.weight = values_args
-                if index == 2 and values_args is not None:
-                    self.coords = values_args
+    def __init__(
+            self,
+            name: str = "",
+            weight: int = 0,
+            coords: list = None,
+            **kwargs
+    ) -> None:
+        self.name = name
+        self.weight = weight
+        if coords is None:
+            self.coords = [0, 0]
+        else:
+            self.coords = coords
 
         for key, values in kwargs.items():
             if key == "name":
@@ -46,11 +46,18 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-
-        if len(args) < 3 and "coords" not in kwargs:
-            self.coords.append(0)
+    def __init__(
+            self,
+            name: str = "",
+            weight: int = 0,
+            coords: list = None,
+            **kwargs
+    ) -> None:
+        super().__init__(name, weight, coords, **kwargs)
+        if coords is None:
+            self.coords = [0, 0, 0]
+        else:
+            self.coords = coords
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -60,8 +67,19 @@ class FlyingRobot(BaseRobot):
 
 
 class DeliveryDrone(FlyingRobot):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(
+            self,
+            name: str = "",
+            weight: int = 0,
+            coords: list = None,
+            **kwargs
+    ) -> None:
+        super().__init__(name, weight, coords, **kwargs)
+        if coords is None:
+            self.coords = [0, 0, 0]
+        else:
+            self.coords = coords
+
         if "max_load_weight" not in kwargs:
             self.max_load_weight = 0
         else:
