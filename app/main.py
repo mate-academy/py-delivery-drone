@@ -8,26 +8,11 @@ class BaseRobot:
             self,
             name: str = "",
             weight: int = 0,
-            coords: list = None,
-            **kwargs
+            coords: list[int] = None
     ) -> None:
         self.name = name
         self.weight = weight
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords
-
-        for key, values in kwargs.items():
-            if key == "name":
-                self.name = values
-            if key == "weight":
-                self.weight = values
-            if key == "coords":
-                if values is None:
-                    self.coords = [0, 0]
-                else:
-                    self.coords = values
+        self.coords = [0, 0] if coords is None else coords
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -50,14 +35,10 @@ class FlyingRobot(BaseRobot):
             self,
             name: str = "",
             weight: int = 0,
-            coords: list = None,
-            **kwargs
+            coords: list[int] = None
     ) -> None:
-        super().__init__(name, weight, coords, **kwargs)
-        if coords is None:
-            self.coords = [0, 0, 0]
-        else:
-            self.coords = coords
+        super().__init__(name, weight, coords)
+        self.coords = [0, 0, 0] if coords is None else coords
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -71,23 +52,17 @@ class DeliveryDrone(FlyingRobot):
             self,
             name: str = "",
             weight: int = 0,
-            coords: list = None,
+            coords: list[int] = None,
             **kwargs
     ) -> None:
-        super().__init__(name, weight, coords, **kwargs)
-        if coords is None:
-            self.coords = [0, 0, 0]
-        else:
-            self.coords = coords
-
-        if "max_load_weight" not in kwargs:
-            self.max_load_weight = 0
-        else:
-            self.max_load_weight = kwargs["max_load_weight"]
-        if "current_load" not in kwargs:
-            self.current_load = None
-        else:
-            self.current_load = kwargs["current_load"]
+        super().__init__(name, weight, coords)
+        self.coords = [0, 0, 0] if coords is None else coords
+        self.max_load_weight = (
+            kwargs["max_load_weight"] if "max_load_weight" in kwargs else 0
+        )
+        self.current_load = (
+            kwargs["current_load"] if "current_load" in kwargs else 0
+        )
 
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None:
