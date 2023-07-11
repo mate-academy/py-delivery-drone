@@ -1,4 +1,4 @@
-from app.base_robot import BaseRobot, list_isinstance
+from app.base_robot import BaseRobot
 from app.constants import FLYING_STEP, Z_INDEX
 
 
@@ -12,15 +12,13 @@ class FlyingRobot(BaseRobot):
     def __init__(self, name: str, weight: int,
                  coords: list | None = None) -> None:
         super().__init__(name, weight, coords)
-
-        self.z_pos = list_isinstance(coords, Z_INDEX)
-        self.coords = [self.x_pos, self.y_pos, self.z_pos]
+        self.coords = coords if coords else [0, 0, 0]
 
     def go_up(self, step: int = FLYING_STEP) -> None:
-        self.move("z_pos", step, "+", Z_INDEX)
+        self.move(step, "+", Z_INDEX)
 
     def go_down(self, step: int = FLYING_STEP) -> None:
-        self.move("z_pos", step, "-", Z_INDEX)
+        self.move(step, "-", Z_INDEX)
 
 
 class DeliveryDrone(FlyingRobot):
