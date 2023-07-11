@@ -4,7 +4,7 @@ from app.constants import X_INDEX, Y_INDEX, BASE_ROBOT_STEP
 class BaseRobot:
 
     def __init__(self, name: str, weight: int,
-                 coords: list | None = None) -> None:
+                 coords: list[int] | None = None) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords if coords else [0, 0]
