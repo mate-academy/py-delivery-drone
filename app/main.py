@@ -24,8 +24,8 @@ class BaseRobot:
         self.coords[1] -= step
 
     def go_right(self,
-                step: int = 1
-                ) -> None:
+                 step: int = 1
+                 ) -> None:
         self.coords[0] += step
 
     def go_left(self,
