@@ -8,7 +8,7 @@ class BaseRobot:
             self,
             name: str,
             weight: int,
-            coords: list[int] = None
+            coords: list[str] = None
     ) -> None:
         self.name = name
         self.weight = weight
@@ -35,7 +35,7 @@ class FlyingRobot(BaseRobot):
             self,
             name: str,
             weight: int,
-            coords: list[int] = None
+            coords: list[str] = None
     ) -> None:
         coords = coords if coords else [0, 0, 0]
         super().__init__(name, weight, coords)
