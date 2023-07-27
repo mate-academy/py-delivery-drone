@@ -7,7 +7,7 @@ class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list = None) -> None:
+                 coords: list[int] = None) -> None:
 
         if coords is None:
             coords = [0, 0]
@@ -16,19 +16,19 @@ class BaseRobot:
         self.name = name
         self.weight = weight
 
-    def go_forward(self, step: int = 1) -> list:
+    def go_forward(self, step: int = 1) -> list[int]:
         self.coords[1] += step
         return self.coords
 
-    def go_back(self, step: int = 1) -> list:
+    def go_back(self, step: int = 1) -> list[int]:
         self.coords[1] -= step
         return self.coords
 
-    def go_right(self, step: int = 1) -> list:
+    def go_right(self, step: int = 1) -> list[int]:
         self.coords[0] += step
         return self.coords
 
-    def go_left(self, step: int = 1) -> list:
+    def go_left(self, step: int = 1) -> list[int]:
         self.coords[0] -= step
         return self.coords
 
@@ -40,7 +40,7 @@ class FlyingRobot(BaseRobot):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list = None) -> None:
+                 coords: list[int] = None) -> None:
 
         if coords is None:
             coords = [0, 0, 0]
@@ -50,11 +50,11 @@ class FlyingRobot(BaseRobot):
             weight,
             coords)
 
-    def go_up(self, step: int = 1) -> list:
+    def go_up(self, step: int = 1) -> list[int]:
         self.coords[2] += step
         return self.coords
 
-    def go_down(self, step: int = 1) -> list:
+    def go_down(self, step: int = 1) -> list[int]:
         self.coords[2] -= step
         return self.coords
 
@@ -65,7 +65,7 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  max_load_weight: int,
                  current_load: int,
-                 coords: list = None) -> None:
+                 coords: list[int] = None) -> None:
 
         self.max_load_weight = max_load_weight
         self.current_load = current_load
