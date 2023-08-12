@@ -20,10 +20,10 @@ class BaseRobot:
     def go_back(self, step: int = 1) -> None:
         self.go_forward(-step)
 
-    def go_right(self, step=1):
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
 
-    def go_left(self, step=1):
+    def go_left(self, step: int = 1) -> None:
         self.go_right(-step)
 
     def get_info(self) -> str:
@@ -54,8 +54,7 @@ class DeliveryDrone(FlyingRobot):
         weight: int,
         max_load_weight: int,
         current_load: Cargo,
-        coords: list[int] = None
-
+        coords: list[int] = None,
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
