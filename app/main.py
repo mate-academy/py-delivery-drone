@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Optional
 
 
 class Cargo:
@@ -15,10 +15,7 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        if coords:
-            self.coords = coords
-        else:
-            self.coords = [0, 0]
+        self.coords = coords if coords else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -60,7 +57,7 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int,
-            current_load: Union[None, Cargo],
+            current_load: Optional[Cargo],
             coords: list[int] = None
     ) -> None:
         self.max_load_weight = max_load_weight
