@@ -1,5 +1,6 @@
 from typing import Union
 
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
@@ -64,7 +65,7 @@ class DeliveryDrone(FlyingRobot):
         self.current_load = current_load
 
     def hook_load(self, loaded_item: "Cargo") -> None:
-        if (self.current_load is None) and (
+        if self.current_load is None and (
                 loaded_item.weight <= self.max_load_weight):
             self.current_load = loaded_item
 
