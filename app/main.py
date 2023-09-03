@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Optional
 
 
 class Cargo:
@@ -7,7 +8,12 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[list[int]] = None
+    ) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords
@@ -15,50 +21,37 @@ class BaseRobot:
             self.coords = [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
-        if self.coords:
-            self.coords[1] += step
-        else:
-            self.coords = [0, step]
+        self.coords[1] += step
 
     def go_back(self, step: int = 1) -> None:
-        if self.coords:
-            self.coords[1] -= step
-        else:
-            self.coords = [0, step]
+        self.coords[1] -= step
 
     def go_right(self, step: int = 1) -> None:
-        if self.coords:
-            self.coords[0] += step
-        else:
-            self.coords = [0, step]
+        self.coords[0] += step
 
     def go_left(self, step: int = 1) -> None:
-        if self.coords:
-            self.coords[0] -= step
-        else:
-            self.coords = [0, step]
+        self.coords[0] -= step
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[list[str]] = None
+    ) -> None:
         super().__init__(name, weight, coords=coords)
         if not coords:
             self.coords = [0, 0, 0]
 
     def go_up(self, step: int = 1) -> None:
-        if self.coords:
-            self.coords[2] += step
-        else:
-            self.coords = [0, step]
+        self.coords[2] += step
 
     def go_down(self, step: int = 1) -> None:
-        if self.coords:
-            self.coords[2] -= step
-        else:
-            self.coords = [0, step]
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
@@ -66,9 +59,9 @@ class DeliveryDrone(FlyingRobot):
             self,
             name: str,
             weight: int,
-            coords: list = None,
+            coords: Optional[list[int]] = None,
             max_load_weight: int = 0,
-            current_load: Cargo = None
+            current_load: Optional[Cargo] = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
