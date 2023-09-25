@@ -1,24 +1,32 @@
+from typing import Optional, List
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
 
 class BaseRobot:
-    def __init__(self, name, weight, coords=None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[List[int]] = None
+    ) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords if coords is not None else [0, 0]
 
-    def go_forward(self, step=1) -> None:
+    def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
 
-    def go_back(self, step=1) -> None:
+    def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
 
-    def go_right(self, step=1) -> None:
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
 
-    def go_left(self, step=1) -> None:
+    def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
     def get_info(self) -> str:
@@ -26,7 +34,12 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name, weight, coords=None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[List[int]] = None
+    ) -> None:
         if coords is None:
             coords = [0, 0, 0]
         super().__init__(name, weight, coords)
@@ -41,11 +54,11 @@ class FlyingRobot(BaseRobot):
 class DeliveryDrone(FlyingRobot):
     def __init__(
             self,
-            name,
-            weight,
-            max_load_weight,
-            current_load,
-            coords=None
+            name: str,
+            weight: int,
+            max_load_weight: int,
+            current_load: Optional[Cargo],
+            coords: Optional[List[int]] = None
     ) -> None:
         super(DeliveryDrone, self).__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
