@@ -1,3 +1,6 @@
+from typing import Union
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
@@ -53,7 +56,7 @@ class DeliveryDrone(FlyingRobot):
         name: str,
         weight: int,
         coords: tuple[int] = (0, 0, 0),
-        current_load: None = None | int
+        current_load: Union[None, "Cargo"] = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
