@@ -5,8 +5,6 @@ class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
-# write your code here
-
 
 class BaseRobot:
     def __init__(
@@ -17,19 +15,21 @@ class BaseRobot:
         self.name = name
         self.weight = weight
         self.coords = coords if (
-            coords is not None and len(coords) < 2) else [0, 0]
+            coords is not None) else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
-        self.coords = [self.coords[0], self.coords[1] + step]
+        self.coords = self.coords[:1] + \
+            [self.coords[1] + step] + self.coords[2:]
 
     def go_back(self, step: int = 1) -> None:
-        self.coords = [self.coords[0], self.coords[1] - step]
+        self.coords = self.coords[:1] + \
+            [self.coords[1] - step] + self.coords[2:]
 
     def go_right(self, step: int = 1) -> None:
-        self.coords = [self.coords[0] + step, self.coords[1]]
+        self.coords = [self.coords[0] + step] + self.coords[1:]
 
     def go_left(self, step: int = 1) -> None:
-        self.coords = [self.coords[0] - step, self.coords[1]]
+        self.coords = [self.coords[0] - step] + self.coords[1:]
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -42,13 +42,13 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list[int] = None) -> None:
         super().__init__(name, weight, coords if (
-            coords is not None and len(coords) < 3) else [0, 0, 0])
+            coords is not None) else [0, 0, 0])
 
     def go_up(self, step: int = 1) -> None:
-        self.coords[3] += step
+        self.coords = self.coords[:-1] + [self.coords[-1] + step]
 
     def go_down(self, step: int = 1) -> None:
-        self.coords[3] -= step
+        self.coords = self.coords[:-1] + [self.coords[-1] - step]
 
 
 class DeliveryDrone(FlyingRobot):
@@ -60,7 +60,7 @@ class DeliveryDrone(FlyingRobot):
             current_load: Cargo,
             coords: list[int] = None) -> None:
         super().__init__(name, weight, coords if (
-            coords is not None and len(coords) < 3) else [0, 0, 0])
+            coords is not None) else [0, 0, 0])
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
