@@ -15,7 +15,12 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        self.coords = coords if coords is not None else [0, 0]
+        if coords is not None:
+            self.coords = coords
+        elif isinstance(self, (FlyingRobot, DeliveryDrone)):
+            self.coords = [0, 0, 0]
+        else:
+            self.coords = [0, 0]
 
     def go_forward(self, point: int = 1) -> None:
         self.coords[1] += point
@@ -43,7 +48,7 @@ class FlyingRobot(BaseRobot):
         super().__init__(
             name,
             weight,
-            coords if coords is not None else [0, 0, 0]
+            coords
         )
 
     def go_up(self, point: int = 1) -> None:
@@ -65,7 +70,7 @@ class DeliveryDrone(FlyingRobot):
         super().__init__(
             name,
             weight,
-            coords if coords is not None else [0, 0, 0]
+            coords
         )
         self.max_load_weight = max_load_weight
         self.current_load = current_load
