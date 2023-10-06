@@ -17,8 +17,6 @@ class BaseRobot:
         self.weight = weight
         if coords is not None:
             self.coords = coords
-        elif isinstance(self, (FlyingRobot, DeliveryDrone)):
-            self.coords = [0, 0, 0]
         else:
             self.coords = [0, 0]
 
@@ -45,6 +43,8 @@ class FlyingRobot(BaseRobot):
         weight: int,
         coords: list[int] = None
     ) -> None:
+        if coords is None:
+            coords = [0, 0, 0]
         super().__init__(
             name,
             weight,
@@ -67,6 +67,8 @@ class DeliveryDrone(FlyingRobot):
         coords: list[int] = None,
         current_load: Union[None, "Cargo"] = None
     ) -> None:
+        if coords is None:
+            coords = [0, 0, 0]
         super().__init__(
             name,
             weight,
