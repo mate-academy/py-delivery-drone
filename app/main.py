@@ -12,16 +12,16 @@ class BaseRobot:
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
-    def go_forward(self, step = 1) -> None:
+    def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
 
-    def go_back(self, step = 1) -> None:
+    def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
 
-    def go_left(self, step = 1) -> None:
+    def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
-    def go_right(self, step = 1) -> None:
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
 
 
@@ -62,4 +62,3 @@ class DeliveryDrone(FlyingRobot):
     def unhook_load(self) -> None:
         if self.current_load:
             self.current_load = None
-        
