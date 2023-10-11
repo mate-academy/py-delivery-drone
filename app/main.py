@@ -15,7 +15,7 @@ class BaseRobot:
 
         self.name = name
         self.weight = weight
-        self.coords = coords if coords is not None else [0, 0]
+        self.coords = coords if coords else [0, 0]
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -43,7 +43,7 @@ class FlyingRobot(BaseRobot):
         super().__init__(
             name=name,
             weight=weight,
-            coords=coords if coords is not None else [0, 0, 0]
+            coords=coords if coords else [0, 0, 0]
         )
 
     def go_up(self, step: int = 1) -> None:
