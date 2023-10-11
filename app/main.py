@@ -8,8 +8,7 @@ class BaseRobot:
         self.name = name
         self.weight = weight
         self.coords = coords
-        if self.coords is None:
-            self.coords = [0, 0]
+        self.coords = coords if self.coords else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
