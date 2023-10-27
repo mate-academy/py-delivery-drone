@@ -60,8 +60,3 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
-
-
-class Cargo:
-    def __init__(self, weight: int) -> None:
-        self.weight = weight
