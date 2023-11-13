@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
@@ -27,12 +28,15 @@ class BaseRobot:
     def go_left(self, x_step: int | float = 1) -> None:
         self.coords[0] -= x_step
 
-    def get_info(self):
+    def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int | float, coords: list = None):
+    def __init__(self,
+                 name: str,
+                 weight: int | float,
+                 coords: list = None) -> None:
         super().__init__(name, weight, coords=coords if coords else [0, 0, 0])
 
     def go_up(self, z_step: int | float = 1) -> None:
