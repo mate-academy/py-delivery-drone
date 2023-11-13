@@ -2,7 +2,7 @@ from typing import List, Optional
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: float, coords: Optional[List[float]] = None):
+    def __init__(self, name: str, weight: float, coords: Optional[List[float]] = None) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords if coords is not None else [0, 0]
@@ -22,12 +22,14 @@ class BaseRobot:
     def get_info(self) -> str:
         return f"Робот: {self.name}, Вага: {self.weight}"
 
+
 class Cargo:
     def __init__(self, weight: float) -> None:
         self.weight = weight
 
+
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: float, coords: Optional[List[float]] = None):
+    def __init__(self, name: str, weight: float, coords: Optional[List[float]] = None) -> None:
         if coords is None:
             coords = [0, 0, 0]
         super().__init__(name, weight, coords)
@@ -38,9 +40,10 @@ class FlyingRobot(BaseRobot):
     def go_down(self, step: float = 1) -> None:
         self.coords[2] -= step
 
+
 class DeliveryDrone(FlyingRobot):
     def __init__(self, name: str, weight: float, max_load_weight: float,
-                 current_load: Optional[Cargo], coords: Optional[List[float]] = None):
+                 current_load: Optional[Cargo], coords: Optional[List[float]] = None) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
