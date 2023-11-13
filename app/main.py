@@ -9,13 +9,11 @@ class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int | float,
-                 coords: list = None) -> None:
+                 coords: list | float | None = None) -> None:
 
         self.name = name
         self.weight = weight
-        self.coords = coords
-        if not self.coords:
-            self.coords = [0, 0]
+        self.coords = coords if coords else [0, 0]
 
     def go_forward(self, y_step: int | float = 1) -> None:
         self.coords[1] += y_step
@@ -34,15 +32,13 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int | float):
-        super().__init__(name, weight)
-        if not self.coords:
-            self.coords = [0, 0, 0]
+    def __init__(self, name: str, weight: int | float, coords: list = None):
+        super().__init__(name, weight, coords=coords if coords else [0, 0, 0])
 
-    def go_up(self, z_step: int | float) -> None:
+    def go_up(self, z_step: int | float = 1) -> None:
         self.coords[-1] += z_step
 
-    def go_down(self, z_step: int | float) -> None:
+    def go_down(self, z_step: int | float = 1) -> None:
         self.coords[-1] -= z_step
 
 
@@ -51,16 +47,17 @@ class DeliveryDrone(FlyingRobot):
                  name: str,
                  weight: int | float,
                  max_load_weight: int | float,
-                 current_load: int | float) -> None:
+                 current_load: int | float,
+                 coords: list = None) -> None:
 
-        super().__init__(name, weight)
+        super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
-        if not self.current_load:
+        if self.current_load is None:
             if cargo.weight <= self.max_load_weight:
-                self.current_load = cargo.weight
+                self.current_load = cargo
 
     def unhook_load(self) -> None:
         self.current_load = None
