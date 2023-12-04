@@ -33,7 +33,6 @@ class BaseRobot:
 class FlyingRobot(BaseRobot):
     def __init__(
             self,
-            # *args
             name: str,
             weight: int,
             coords: list[int] = None
