@@ -1,16 +1,18 @@
+from typing import Optional, List
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self, name: str, weight: int, coords: Optional[List[int]] = None
+    ) -> None:
         self.name = name
         self.weight = weight
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords
+        self.coords = [0, 0] if coords is None else coords
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
