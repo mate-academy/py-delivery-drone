@@ -9,10 +9,10 @@ class Cargo:
 
 class BaseRobot:
     def __init__(self, name: str, weight: float,
-                 coords: Optional[List[float]] = None) -> None:
+                 coords: Optional[List[int]] = None) -> None:
         self.name = name
         self.weight = weight
-        self.coords = [0, 0] if coords is None else coords
+        self.coords = coords or [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
