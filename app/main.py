@@ -42,8 +42,7 @@ class FlyingRobot(BaseRobot):
             coords: list[int] | None = None
     ) -> None:
 
-        if coords is None:
-            coords = [0, 0, 0]
+        coords = [0, 0, 0] if not coords else coords
 
         super().__init__(name, weight, coords)
 
