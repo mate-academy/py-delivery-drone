@@ -1,10 +1,18 @@
+from typing import Optional
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[list] = None
+    ) -> None:
         self.name = name
         self.weight = weight
         if coords is None:
@@ -29,7 +37,12 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: Optional[list] = None
+    ) -> None:
         super().__init__(name, weight)
         if coords is None:
             self.coords = [0, 0, 0]
@@ -48,9 +61,9 @@ class DeliveryDrone(FlyingRobot):
             self,
             name: str,
             weight: int,
-            coords: list = None,
-            max_load_weight: int | None = None,
-            current_load: int | None = None
+            coords: Optional[list] = None,
+            max_load_weight: Optional[int] = None,
+            current_load: Optional[int] = None
 
     ) -> None:
         super().__init__(name, weight, coords)
@@ -58,9 +71,8 @@ class DeliveryDrone(FlyingRobot):
         self.current_load = current_load
 
     def hook_load(self, other: Cargo) -> None:
-        if not self.current_load:
-            if other.weight <= self.max_load_weight:
-                self.current_load = other
+        if not self.current_load and other.weight <= self.max_load_weight:
+            self.current_load = other
 
     def unhook_load(self) -> None:
         self.current_load = None
