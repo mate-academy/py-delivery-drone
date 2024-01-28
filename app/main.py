@@ -4,13 +4,12 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(self, name: str,
+                 weight: int,
+                 coords: list[int] = None) -> None:
         self.name = name
         self.weight = weight
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords
+        self.coords = [0, 0] if coords is None else coords
 
     def go_forward(self, steep: int = 1) -> None:
         self.coords[1] += steep
@@ -29,15 +28,11 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(self, name: str,
+                 weight: int,
+                 coords: list[int] = None) -> None:
         super().__init__(name, weight)
-        if coords is None:
-            self.coords = [0, 0, 0]
-# I don't know how to do it differently
-# If there is any other way to solve this
-# I will gladly hear about it from you :)
-        else:
-            self.coords = coords
+        self.coords = [0, 0, 0] if coords is None else coords
 
     def go_up(self, steep: int = 1) -> None:
         self.coords[2] += steep
@@ -51,7 +46,7 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  max_load_weight: int,
                  current_load: int,
-                 coords: list = None,
+                 coords: list[int] = None,
                  ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
