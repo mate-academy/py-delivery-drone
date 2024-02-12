@@ -18,7 +18,7 @@ class BaseRobot(Cargo):
     ) -> None:
         super().__init__(weight)
         self.name = name
-        self.coords = coords if coords is not None else [0, 0]
+        self.coords = coords or [0, 0]
 
     def go_forward(
             self,
