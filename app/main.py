@@ -12,7 +12,6 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self. weight = weight
-
         if coords is None:
             self.coords = [0, 0]
         else:
