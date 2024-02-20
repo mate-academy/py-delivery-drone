@@ -9,5 +9,18 @@ class BaseRobot:
         self.weight = weight
         self.coords = coords[0], coords[1]
 
+    def go_forward(self, step: int = 1):
+        self.coords[1] += step
+
+    def go_back(self, step: int = 1):
+        self.coords[1] -= step
+
+    def go_right(self, step: int = 1):
+        self.coords[0] += step
+
+    def go_left(self, step: int = 1):
+        self.coords[0] -= step
+
+
 
 
