@@ -10,9 +10,7 @@ class BaseRobot:
                  coords: list[int] | None = None) -> None:
         self.name = name
         self.weight = weight
-        self.coords = coords
-        if not self.coords:
-            self.coords = [0, 0]
+        self.coords = coords if coords is not None else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
