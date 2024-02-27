@@ -4,26 +4,25 @@ class Cargo:
 
 
 class BaseRobot:
-    def_p_step = 1
 
     def __init__(self, name: str,
                  weight: int,
                  coords: None | list = None
                  ) -> None:
-        self.coords = coords if coords else [0, 0]
+        self.coords = coords or [0, 0]
         self.name = name
         self.weight = weight
 
-    def go_forward(self, step: int = def_p_step) -> None:
+    def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
 
-    def go_back(self, step: int = def_p_step) -> None:
+    def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
 
-    def go_right(self, step: int = def_p_step) -> None:
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
 
-    def go_left(self, step: int = def_p_step) -> None:
+    def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
     def get_info(self) -> None:
