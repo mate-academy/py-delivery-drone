@@ -8,28 +8,24 @@ class BaseRobot:
             self,
             name: str,
             weight: int,
-            coords: list = None
+            coords: list[int] = None
     ) -> None:
 
         self.name = name
         self.weight = weight
-        self.coords = [0, 0] if coords is None else coords
+        self.coords = coords or [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
-        pass
 
     def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
-        pass
 
     def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
-        pass
 
     def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
-        pass
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
