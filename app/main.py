@@ -13,30 +13,22 @@ class BaseRobot:
         weight: int,
         coords: List[int] = None,
     ) -> None:
-        if coords is None:
-            coords = [0, 0]
         self.name = name
         self.weight = weight
-        self.coords = coords
+        self.coords = coords if coords is not None else [0, 0]
         # not unpacking, because while take FlyingRobot coords have a error
-        self.x = coords[0]
-        self.y = coords[1]
 
     def go_forward(self, step: int = 1) -> None:
-        self.y += step
-        self.coords[1] = self.y
+        self.coords[1] += step
 
     def go_back(self, step: int = 1) -> None:
-        self.y -= step
-        self.coords[1] = self.y
+        self.coords[1] -= step
 
     def go_right(self, step: int = 1) -> None:
-        self.x += step
-        self.coords[0] = self.x
+        self.coords[0] += step
 
     def go_left(self, step: int = 1) -> None:
-        self.x -= step
-        self.coords[0] = self.x
+        self.coords[0] -= step
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -50,18 +42,17 @@ class FlyingRobot(BaseRobot):
         coords: List[int] = None,
 
     ) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
-        self.z = coords[2]
-        super().__init__(name=name, weight=weight, coords=coords)
+        super().__init__(
+            name=name,
+            weight=weight,
+            coords=coords if coords is not None else [0, 0, 0]
+        )
 
     def go_up(self, step: int = 1) -> None:
-        self.z += step
-        self.coords[2] = self.z
+        self.coords[2] += step
 
     def go_down(self, step: int = 1) -> None:
-        self.z -= step
-        self.coords[2] = self.z
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
@@ -75,7 +66,11 @@ class DeliveryDrone(FlyingRobot):
     ) -> None:
         if coords is None:
             coords = [0, 0, 0]
-        super().__init__(name, weight, coords)
+        super().__init__(
+            name,
+            weight,
+            coords if coords is not None else [0, 0, 0]
+        )
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
