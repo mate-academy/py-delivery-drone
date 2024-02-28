@@ -1,8 +1,15 @@
 from typing import List, Optional
 
 
-class MoveMixin:
-    coords: Optional[List[int]] = None
+class BaseRobot:
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: Optional[List[int]] = None
+                 ) -> None:
+        self.name = name
+        self.weight = weight
+        self.coords = coords if coords is not None else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -15,18 +22,6 @@ class MoveMixin:
 
     def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
-
-
-class BaseRobot(MoveMixin):
-    def __init__(self,
-                 name: str,
-                 weight: int,
-                 coords: Optional[List[int]] = None
-                 ) -> None:
-        super().__init__()
-        self.name = name
-        self.weight = weight
-        self.coords = coords if coords is not None else [0, 0]
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
