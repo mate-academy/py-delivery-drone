@@ -69,7 +69,7 @@ class DeliveryDrone(FlyingRobot):
 
     def hook_load(self, load: Cargo) -> None:
         if (
-            self.current_load is None
+            not self.current_load
             and load.weight <= self.max_load_weight
         ):
             self.current_load = load
