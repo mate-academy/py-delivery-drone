@@ -8,11 +8,9 @@ X, Y, Z = 0, 1, 2
 
 class BaseRobot():
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
-        if not coords:
-            coords = [0, 0]
         self.name = name
         self.weight = weight
-        self.coords = coords
+        self.coords = coords if coords else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[Y] += step
