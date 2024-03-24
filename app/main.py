@@ -2,19 +2,6 @@ class Cargo:
     def __init__(self, weight: int | float) -> None:
         self.weight = weight
 
-    @property
-    def weight(self) -> int | float:
-        return self._weight
-
-    @weight.setter
-    def weight(self, value: int | float) -> None:
-        if not isinstance(value, (int, float)):
-            raise ValueError(
-                f"""Unsupported type. Expected float or int.
-                Got {type(value)} instead."""
-            )
-        self._weight = value
-
 
 class BaseRobot(Cargo):
     def __init__(
