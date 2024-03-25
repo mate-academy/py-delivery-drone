@@ -12,10 +12,7 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords
+        self.coords = [0, 0] if not coords else coords
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -40,9 +37,8 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list = None
     ) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
         super().__init__(name, weight, coords)
+        self.coords = [0, 0, 0] if not coords else coords
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -54,14 +50,14 @@ class FlyingRobot(BaseRobot):
 class DeliveryDrone(FlyingRobot):
     def __init__(
             self, name: str,
-            weight: int,
+            weight: float,
             coords: list = None,
             max_load_weight: int = 0,
-            current_load: int = None
+            current_load: Cargo = None
     ) -> None:
+        super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
-        super().__init__(name, weight, coords)
 
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
