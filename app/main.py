@@ -10,8 +10,7 @@ class BaseRobot:
             weight: int,
             coords: list[int, int] | None = None
     ) -> None:
-        if coords is None:
-            coords = [0, 0]
+        coords = [0, 0] if coords is None else coords
         self.name = name
         self.weight = weight
         self.coords = coords
