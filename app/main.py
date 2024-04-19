@@ -7,9 +7,9 @@ class BaseRobot:
     def __init__(self, name: str,
                  weight: float,
                  coords: list[int] = None) -> None:
-        (self.name,
-         self.weight,
-         self.coords) = (name, weight, [0, 0] if coords is None else coords)
+        self.name = name
+        self.weight = weight
+        self.coords = coords or [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -31,13 +31,7 @@ class FlyingRobot(BaseRobot):
     def __init__(self, name: str,
                  weight: float,
                  coords: list[int] = None) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
-        else:
-            if len(coords) < 3:
-                coords.extend([0] * (3 - len(coords)))
-
-        super().__init__(name, weight, coords)
+        super().__init__(name, weight, coords=coords or [0, 0, 0])
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
