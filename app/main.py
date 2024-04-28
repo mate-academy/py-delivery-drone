@@ -41,9 +41,7 @@ class BaseRobot:
     ) -> None:
         self.coords[0] -= step
 
-    def get_info(
-            self
-    ) -> str:
+    def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
 
@@ -89,7 +87,5 @@ class DeliveryDrone(FlyingRobot):
         if cargo.weight <= self.max_load_weight and not self.current_load:
             self.current_load = cargo
 
-    def unhook_load(
-            self
-    ) -> None:
+    def unhook_load(self) -> None:
         self.current_load = None
