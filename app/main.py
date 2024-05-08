@@ -29,7 +29,7 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
-        super().__init__(name, weight, coords)
+        super().__init__(name, weight)
         if coords is None:
             coords = [0, 0, 0]
 
@@ -50,7 +50,7 @@ class DeliveryDrone(FlyingRobot):
         self.max_load_weight = max_load_weight
 
     def hook_load(self, cargo: Cargo) -> None:
-        if self.current_load is None and self.max_load_weight <= cargo.weight:
+        if self.current_load is None and self.max_load_weight >= cargo.weight:
             self.current_load = cargo
 
     def unhook_load(self) -> None:
