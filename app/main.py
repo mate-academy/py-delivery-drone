@@ -15,44 +15,36 @@ class BaseRobot:
         self.coords = coords
 
     def go_forward(self, number: int = 1) -> None:
-        if len(self.coords) == 3:
-            self.coords = [
-                self.coords[0],
-                self.coords[1] + number,
-                self.coords[2]
-            ]
-        else:
-            self.coords = [self.coords[0], self.coords[1] + number]
+        self.coords = [
+            value + number
+            if index == 1
+            else value
+            for index, value in enumerate(self.coords)
+        ]
 
     def go_back(self, number: int = 1) -> None:
-        if len(self.coords) == 3:
-            self.coords = [
-                self.coords[0],
-                self.coords[1] - number,
-                self.coords[2]
-            ]
-        else:
-            self.coords = [self.coords[0], self.coords[1] - number]
+        self.coords = [
+            value - number
+            if index == 1
+            else value
+            for index, value in enumerate(self.coords)
+        ]
 
     def go_right(self, number: int = 1) -> None:
-        if len(self.coords) == 3:
-            self.coords = [
-                self.coords[0] + number,
-                self.coords[1],
-                self.coords[2]
-            ]
-        else:
-            self.coords = [self.coords[0] + number, self.coords[1]]
+        self.coords = [
+            value + number
+            if index == 0
+            else value
+            for index, value in enumerate(self.coords)
+        ]
 
     def go_left(self, number: int = 1) -> None:
-        if len(self.coords) == 3:
-            self.coords = [
-                self.coords[0] - number,
-                self.coords[1],
-                self.coords[2]
-            ]
-        else:
-            self.coords = [self.coords[0] - number, self.coords[1]]
+        self.coords = [
+            value - number
+            if index == 0
+            else value
+            for index, value in enumerate(self.coords)
+        ]
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -70,16 +62,18 @@ class FlyingRobot(BaseRobot):
 
     def go_up(self, number: int = 1) -> None:
         self.coords = [
-            self.coords[0],
-            self.coords[1],
-            self.coords[2] + number
+            value + number
+            if index == 2
+            else value
+            for index, value in enumerate(self.coords)
         ]
 
     def go_down(self, number: int = 1) -> None:
         self.coords = [
-            self.coords[0],
-            self.coords[1],
-            self.coords[2] - number
+            value - number
+            if index == 2
+            else value
+            for index, value in enumerate(self.coords)
         ]
 
 
