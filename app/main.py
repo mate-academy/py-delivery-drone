@@ -8,43 +8,25 @@ class BaseRobot:
             self,
             name: str,
             weight: int,
-            coords: list = [0, 0]
+            coords: list = None
     ) -> None:
         self.name = name
         self.weight = weight
+        if coords is None:
+            coords = [0, 0]
         self.coords = coords
 
     def go_forward(self, number: int = 1) -> None:
-        self.coords = [
-            value + number
-            if index == 1
-            else value
-            for index, value in enumerate(self.coords)
-        ]
+        self.coords[1] += number
 
     def go_back(self, number: int = 1) -> None:
-        self.coords = [
-            value - number
-            if index == 1
-            else value
-            for index, value in enumerate(self.coords)
-        ]
+        self.coords[1] -= number
 
     def go_right(self, number: int = 1) -> None:
-        self.coords = [
-            value + number
-            if index == 0
-            else value
-            for index, value in enumerate(self.coords)
-        ]
+        self.coords[0] += number
 
     def go_left(self, number: int = 1) -> None:
-        self.coords = [
-            value - number
-            if index == 0
-            else value
-            for index, value in enumerate(self.coords)
-        ]
+        self.coords[0] -= number
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -55,26 +37,18 @@ class FlyingRobot(BaseRobot):
             self,
             name: str,
             weight: int,
-            coords: list = [0, 0, 0]
+            coords: list = None
     ) -> None:
         super().__init__(name, weight)
+        if coords is None:
+            coords = [0, 0, 0]
         self.coords = coords
 
     def go_up(self, number: int = 1) -> None:
-        self.coords = [
-            value + number
-            if index == 2
-            else value
-            for index, value in enumerate(self.coords)
-        ]
+        self.coords[2] += number
 
     def go_down(self, number: int = 1) -> None:
-        self.coords = [
-            value - number
-            if index == 2
-            else value
-            for index, value in enumerate(self.coords)
-        ]
+        self.coords[2] -= number
 
 
 class DeliveryDrone(FlyingRobot):
@@ -83,7 +57,7 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int,
-            coords: list = [0, 0, 0],
+            coords: list = None,
             current_load: None = None
     ) -> None:
         super().__init__(name, weight, coords)
