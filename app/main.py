@@ -1,6 +1,9 @@
 class BaseRobot:
     def __init__(
-            self, name: str, weight: int, coords: list[int | float] | None = None
+            self,
+            name: str,
+            weight: int,
+            coords: list[int | float] | None = None
     ) -> None:
         self.name = name
         self.weight = weight
@@ -24,7 +27,10 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
     def __init__(
-            self, name: str, weight: int, coords: list[int | float] | None = None
+            self,
+            name: str,
+            weight: int,
+            coords: list[int | float] | None = None
     ) -> None:
         coords = coords or [0, 0, 0]
         super().__init__(name, weight, coords)
