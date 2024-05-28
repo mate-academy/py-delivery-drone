@@ -8,7 +8,7 @@ class BaseRobot:
                  coords: list[int] | dict = None) -> None:
         coords = coords or [0, 0]
         if isinstance(coords, dict):
-            coords = [coords.get('x', 0), coords.get('y', 0)]
+            coords = [coords.get("x", 0), coords.get("y", 0)]
         self.name = name
         self.weight = weight
         self.coords = coords
@@ -34,7 +34,9 @@ class FlyingRobot(BaseRobot):
                  coords: list[int] | dict = None) -> None:
         coords = coords or [0, 0, 0]
         if isinstance(coords, dict):
-            coords = [coords.get('x', 0), coords.get('y', 0), coords.get('z', 0)]
+            coords = [
+                coords.get("x", 0), coords.get("y", 0), coords.get("z", 0)
+            ]
         super().__init__(name, weight, coords)
 
     def go_up(self, value: int = 1) -> None:
