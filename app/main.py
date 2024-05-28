@@ -37,7 +37,11 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list[int] | None = None
     ) -> None:
-        super().__init__(name, weight, coords or [0, 0, 0])
+        super().__init__(
+            name=name,
+            weigh=weight,
+            coords=coords or [0, 0, 0]
+        )
 
     def go_up(self, steps: int = 1) -> None:
         self.coords[2] += steps
