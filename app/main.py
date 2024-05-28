@@ -10,7 +10,7 @@ class BaseRobot(Cargo):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = None) -> None:
+                 coords: list = None) -> None:
         super().__init__(weight)
         self.name = name
         self.coords = coords or [0, 0]
@@ -35,7 +35,7 @@ class FlyingRobot(BaseRobot):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = None) -> None:
+                 coords: list = None) -> None:
         super().__init__(name, weight, coords)
         self.coords = coords or [0, 0, 0]
 
@@ -51,9 +51,8 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  max_load_weight: int,
                  current_load: Cargo,
-                 coords: list[int] = None,) -> None:
+                 coords: list = [0, 0, 0]) -> None:
         super().__init__(name, weight, coords)
-        self.coords = coords or [0, 0, 0]
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
