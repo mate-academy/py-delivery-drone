@@ -53,7 +53,7 @@ to the parent's `__init__` method.
 cargo = Cargo(14)
 drone = DeliveryDrone(
     name="Jim", 
-    weight=18, 
+    weight=18, в
     coords=[11, -4, 16], 
     max_load_weight=20, 
     current_load=None,
