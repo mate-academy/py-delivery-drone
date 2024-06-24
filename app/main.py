@@ -45,7 +45,12 @@ print(robot.get_info())  # Robot: fry, Weight: 5
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: List[int] = None):
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: List[int] = None
+    ) -> None:
         super().__init__(name, weight, coords)
         if coords is None:
             self.coords = [0, 0, 0]
