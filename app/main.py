@@ -24,17 +24,17 @@ class BaseRobot:
         self.coords[1] += step
         return self.coords
 
-    def go_back(self, step: int = 1) -> BaseRobot:
+    def go_back(self, step: int = 1) -> list:
         self.coords[1] -= step
-        return self
+        return self.coords
 
-    def go_right(self, step: int = 1) -> BaseRobot:
+    def go_right(self, step: int = 1) -> list:
         self.coords[0] += step
-        return self
+        return self.coords
 
-    def go_left(self, step: int = 1) -> BaseRobot:
+    def go_left(self, step: int = 1) -> list:
         self.coords[0] -= step
-        return self
+        return self.coords
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
