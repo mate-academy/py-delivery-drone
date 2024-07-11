@@ -32,12 +32,9 @@ class FlyingRobot(BaseRobot):
 
     def __init__(
             self, name: str,
-            weight: float,
-            coords: list[int] = None) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
-        elif len(coords) == 2:
-            coords.append(0)
+            weight: float, coords: list[int] = None) -> None:
+        coords = [0, 0, 0] if coords is None else coords + [0]\
+            if len(coords) == 2 else coords
         super().__init__(name, weight, coords)
 
     def go_up(self, step: int = 1) -> None:
