@@ -3,7 +3,6 @@ class Cargo:
         self.weight = weight
 
 
-# write your code here
 class BaseRobot:
     def __init__(
             self,
@@ -11,9 +10,7 @@ class BaseRobot:
             weight: int,
             coords: list = None
     ) -> None:
-        self.coords = coords
-        if self.coords is None:
-            self.coords = [0, 0]
+        self.coords = coords or [0, 0]
         self.name = name
         self.weight = weight
 
@@ -40,9 +37,8 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list = None
     ) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
-        super().__init__(name, weight, coords)
+        self.coords = coords or [0, 0, 0]
+        super().__init__(name, weight, self.coords)
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
