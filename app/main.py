@@ -29,8 +29,6 @@ class FlyingRobot(BaseRobot):
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
         if not coords:
             coords = [0, 0, 0]
-        if len(coords) < 3:
-            coords.append(0)
         super().__init__(name, weight, [coords[0], coords[1]])
         self.coords.append(coords[2])
 
@@ -50,8 +48,6 @@ class DeliveryDrone(FlyingRobot):
                  coords: list = None) -> None:
         if not coords:
             coords = [0, 0, 0]
-        if len(coords) < 3:
-            coords.append(0)
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
@@ -61,7 +57,7 @@ class DeliveryDrone(FlyingRobot):
             print(f"didn't hook {cargo}, cargo already in current load")
             return
         if cargo.weight > self.max_load_weight:
-            print(f"didn't hook {cargo}, cargo is too heavy")
+            print("didn't hook cargo. Cargo is too heavy")
             return
         self.current_load = cargo
 
