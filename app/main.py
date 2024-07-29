@@ -4,12 +4,16 @@ class Cargo:
 
 
 class BaseRobot(Cargo):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: None | list = None
+    ) -> None:
         if coords is None:
             coords = [0, 0]
         super().__init__(weight)
         self.name = name
-        self.coords = coords
         self.coords = coords if coords else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
@@ -24,24 +28,17 @@ class BaseRobot(Cargo):
     def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
-    # def move(self, direction: str, step: int = 1) -> None:
-    #     directions = {
-    #         "forward": (0, step),
-    #         "back": (0, -step),
-    #         "right": (step, 0),
-    #         "left": (-step, 0)
-    #     }
-    #     if direction in directions:
-    #         self.coords[0] += directions[direction][0]
-    #         self.coords[1] += directions[direction][1]
-    # why isn't it working?
-
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: None | list = None
+    ) -> None:
         super().__init__(name, weight, coords if coords else [0, 0, 0])
 
     def go_up(self, step: int = 1) -> None:
@@ -56,9 +53,9 @@ class DeliveryDrone(FlyingRobot):
             self,
             name: str,
             weight: int,
-            coords: list = None,
+            coords: None | list = None,
             max_load_weight: int = 0,
-            current_load: Cargo = None,
+            current_load: None | Cargo = None,
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
