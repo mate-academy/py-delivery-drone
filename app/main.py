@@ -55,7 +55,7 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int,
-            current_load: int,
+            current_load: int | None,
             coords: list | None = None
     ) -> None:
 
