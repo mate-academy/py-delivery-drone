@@ -10,8 +10,6 @@ class BaseRobot(Cargo):
             weight: int,
             coords: None | list = None
     ) -> None:
-        if coords is None:
-            coords = [0, 0]
         super().__init__(weight)
         self.name = name
         self.coords = coords if coords else [0, 0]
@@ -64,8 +62,6 @@ class DeliveryDrone(FlyingRobot):
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
             self.current_load = cargo
-    # tried to use the ternary operator to assign,
-    # but it looked terrible
 
     def unhook_load(self) -> None:
         self.current_load = None
