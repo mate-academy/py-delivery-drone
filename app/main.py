@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 
 class Cargo:
@@ -11,12 +11,11 @@ class BaseRobot:
         self,
         name: str,
         weight: int,
-        coords: Optional[list[int]] = None
+        coords: list | None = None
     ) -> None:
-        coords = coords if coords is not None else [0, 0]
         self.name = name
         self.weight = weight
-        self.coords = coords
+        self.coords = coords if coords is not None else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -39,7 +38,7 @@ class FlyingRobot(BaseRobot):
         self,
         name: str,
         weight: int,
-        coords: Optional[list[int]] = None
+        coords: list | None = None
     ) -> None:
         super().__init__(name, weight, coords or [0, 0, 0])
 
@@ -56,7 +55,7 @@ class DeliveryDrone(FlyingRobot):
         name: str,
         weight: int,
         max_load_weight: int,
-        current_load: Cargo = None,
+        current_load: Cargo | None = None,
         coords: list[int] = None
     ) -> None:
         super().__init__(name, weight, coords or [0, 0, 0])
