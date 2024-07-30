@@ -1,4 +1,4 @@
-#i have python version 3.9, so use import annotations
+#i have python version 3.9, so i use import annotations
 from __future__ import annotations
 
 
