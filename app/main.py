@@ -1,5 +1,10 @@
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list | None = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list | None = None
+    ) -> None:
         coords = [0, 0] if coords is None else coords
 
         self.name = name
