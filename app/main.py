@@ -4,7 +4,11 @@ class Cargo:
 
 
 class BaseRobot(Cargo):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self, name: str,
+            weight: int,
+            coords: list[int] = None
+    ) -> None:
         self.weight = weight
         self.name = name
         self.coords = coords or [0, 0]
