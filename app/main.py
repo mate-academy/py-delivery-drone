@@ -72,19 +72,3 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
-
-# cargo = Cargo(14)
-# drone = DeliveryDrone(
-#     name="Jim",
-#     weight=18,
-#     coords=[11, -4, 16],
-#     max_load_weight=20,
-#     current_load=None,
-# )
-# drone.hook_load(cargo)
-# print(drone.current_load is cargo) # drone.current_load is cargo
-#
-# cargo2 = Cargo(2)
-# drone.hook_load(cargo2)
-# print(drone.current_load is cargo) # drone.current_load is cargo
-# # didn't hook cargo2, cargo already in current load
