@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
@@ -46,7 +43,7 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int,
-            current_load: None | Cargo = None,
+            current_load: None,
             coords: list = None
     ) -> None:
         super().__init__(name, weight, coords)
