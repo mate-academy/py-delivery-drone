@@ -5,7 +5,7 @@ class Cargo:
 
 class BaseRobot:
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
-        self.coords = coords if coords else [0, 0]
+        self.coords = coords or [0, 0]
         self.name = name
         self.weight = weight
 
