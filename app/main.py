@@ -1,10 +1,18 @@
+from __future__ import annotations
+
+
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[0, 0] = None
+    ) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords or [0, 0]
@@ -26,7 +34,12 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[0, 0, 0] = None
+    ) -> None:
         super().__init__(name, weight, coords)
         self.coords = coords or [0, 0, 0]
 
@@ -43,7 +56,7 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int,
-            current_load: None,
+            current_load: None | Cargo,
             coords: list = None
     ) -> None:
         super().__init__(name, weight, coords)
@@ -51,7 +64,7 @@ class DeliveryDrone(FlyingRobot):
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
-        if self.current_load is None and self.max_load_weight >= cargo.weight:
+        if not self.current_load and self.max_load_weight >= cargo.weight:
             self.current_load = cargo
 
     def unhook_load(self) -> None:
