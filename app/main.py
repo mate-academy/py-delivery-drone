@@ -68,9 +68,14 @@ class DeliveryDrone(FlyingRobot):
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
+        if not isinstance(cargo, Cargo):
+            raise TypeError("Expected an instance of Cargo")
         if self.current_load is None:
             if cargo.weight <= self.max_load_weight:
                 self.current_load = cargo
+            else:
+                raise ValueError("Cargo weight exceeds the drone's"
+                                 " maximum load capacity")
 
-    def unhook_load(self) -> None:
+    def unhook_load(self) -> Cargo:
         self.current_load = None
