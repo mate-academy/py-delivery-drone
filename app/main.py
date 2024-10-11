@@ -72,7 +72,7 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> str:
         if self.current_load is None:
-            return "No cargo to unhook."
+            raise ValueError("Cannot unhook load. There is no cargo hooked.")
 
         unhooked_cargo = self.current_load
         self.current_load = None
