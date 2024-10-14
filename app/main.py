@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 
 class Cargo:
@@ -11,7 +11,7 @@ class BaseRobot:
         self,
         name: str,
         weight: int,
-        coords: Optional[list[int]] = None,
+        coords: Optional[List[int]] = None,
     ) -> None:
         self.name = name
         self.weight = weight
@@ -38,7 +38,7 @@ class FlyingRobot(BaseRobot):
         self,
         name: str,
         weight: int,
-        coords: Optional[list[int]] = None,
+        coords: Optional[List[int]] = None,
     ) -> None:
         if coords is None:
             coords = [0, 0, 0]
@@ -56,7 +56,7 @@ class DeliveryDrone(FlyingRobot):
         self,
         name: str,
         weight: int,
-        coords: Optional[list[int]] = None,
+        coords: Optional[List[int]] = None,
         max_load_weight: int = 0,
         current_load: Optional[Cargo] = None,
     ) -> None:
@@ -65,8 +65,19 @@ class DeliveryDrone(FlyingRobot):
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
-        if self.current_load is None and cargo.weight <= self.max_load_weight:
-            self.current_load = cargo
+        if self.current_load is None:
+            if cargo.weight <= self.max_load_weight:
+                self.current_load = cargo
+            else:
+                print(
+                    f"Error: Cargo is too heavy to be hooked "
+                    f"(max {self.max_load_weight} kg)."
+                )
+        else:
+            print("Error: There is already a load hooked.")
 
     def unhook_load(self) -> None:
-        self.current_load = None
+        if self.current_load is not None:
+            self.current_load = None
+        else:
+            print("Error: No load to unhook.")
