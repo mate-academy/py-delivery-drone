@@ -40,22 +40,26 @@ class FlyingRobot(BaseRobot):
 
 class DeliveryDrone(FlyingRobot):
     def __init__(self, name: str, weight: int,
-                 max_load_weight: int,
-                 current_load: Cargo = None, coords: list = None) -> None:
+                 max_load_weight: int, current_load: Cargo = None,
+                 coords: list = None) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
-        if self.current_load is None and cargo.weight <= self.max_load_weight:
-            self.current_load = cargo
+        current_load_weight = \
+            (self.current_load.weight) if self.current_load else 0
+        available_capacity = self.max_load_weight - current_load_weight
+
+        if cargo.weight <= available_capacity:
+            if self.current_load:
+                self.current_load.weight += cargo.weight
+            else:
+                self.current_load = cargo
             print(f"Hooked load of weight {cargo.weight}"
                   f". Current load: {self.current_load.weight}")
-        elif (isinstance(self.current_load, Cargo) and self.current_load.weight
-              + cargo.weight <= self.max_load_weight):
-            self.current_load.weight += cargo.weight
-            print(f"Hooked load of weight {cargo.weight}"
-                  f". Current load: {self.current_load.weight}")
+        else:
+            print("Cannot hook load. Exceeds max load weight.")
 
     def unhook_load(self) -> None:
         self.current_load = None
