@@ -26,7 +26,7 @@ class BaseRobot:
 
     def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
-        """Robot move by step(1 by default) left"""
+    """Robot move by step(1 by default) left"""
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -42,11 +42,13 @@ class FlyingRobot(BaseRobot):
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
-    """Robot move by step(1 by default) up"""
 
     def go_down(self, step: int = 1) -> None:
         self.coords[2] -= step
-    """Robot move by step(1 by default) down"""
+
+
+"""Method go_up move Robot by step(1 by default) up
+Method go_down move Robot by step(1 by default) down"""
 
 
 class DeliveryDrone(FlyingRobot):
@@ -61,10 +63,13 @@ class DeliveryDrone(FlyingRobot):
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
             self.current_load = cargo
-    """Changes to object current_load by Drone,
-     if the weight of the object not greater
-      than max_load_weight of the drone"""
 
     def unhook_load(self) -> None:
         self.current_load = None
-        """Changes to None current_load by Drone"""
+
+
+"""
+Method hook_load changes to object current_load by Drone,
+if the weight of the object not greater
+than max_load_weight of the drone
+Method unhook_load changes to None current_load by Drone"""
