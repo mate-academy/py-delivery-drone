@@ -10,12 +10,14 @@ Let's implement 3 classes with inheritance
 - the `__init__` method takes `name`, `weight`, `coords`, 
 and saves them
 - `coords` is list with `x` and `y` coordinates, set to [0, 0] by default.
-It is not a good practice to use mutable object as a default parameter,
-set it to `None` by default, and use condition.
+It is not a good practice to use mutable object as a default parameter of function,
+set it to `None` by default. But in constructor itself you can use condition, and if `coords` equal to None,
+assign [0, 0] to the `coords`.
 - `go_forward`, `go_back`, `go_right` and `go_left` methods 
 take a `step` argument (1 by default) and move the robot by
 `step` in the appropriate direction.
 Positive Y axis is forward, positive X axis is right.
+These functions should not return anything.
 - `get_info` method returns a string in the next format `Robot: {name}, Weight: {weight}`
 ```python
 robot = BaseRobot(name="Walle", weight=34, coords=[3, -2])
@@ -45,10 +47,14 @@ flying_robot.go_up(10)
 - takes the same args as `FlyingRobot` and passes them 
 to the parent's `__init__` method. 
 - the `__init__` method also takes and stores `max_load_weight` and `current_load`.
+`max_load_weight` purpose is to store robot's load capacity.
+`current_load` purpose is to store `Cargo` instance, and it can be None by default.
+If `Cargo` object was passed to function, use method `hook_load` to check if it can be hooked.
 - has `hook_load` method taking `Cargo` object and saves it to
-`current_load` if `current_load` is `None` and `cargo.weight` not greater than
-`max_load_weight` of the drone
-- has `unhook_load` method, that set `current_load` to None
+`current_load` if two conditions are True: `current_load` is set
+to `None` and `cargo.weight` not greater than`max_load_weight`
+of the drone, otherwise, do nothing.
+- has `unhook_load` method, that set `current_load` to None without any additional logic.
 ```python
 cargo = Cargo(14)
 drone = DeliveryDrone(
@@ -76,3 +82,5 @@ drone = DeliveryDrone(
 drone.unhook_load()
 # drone.current_load is None
 ```
+
+### Note: Check your code using this [checklist](checklist.md) before pushing your solution.
