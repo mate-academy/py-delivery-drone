@@ -1,5 +1,9 @@
-class Cargo:
-    def __init__(self, weight: int) -> None:
-        self.weight = weight
+from app.robots.cargo import Cargo
+from app.robots.baseRobot import BaseRobot
+from app.robots.flyingRobot import FlyingRobot
+from app.robots.deliveryDrone import DeliveryDrone
 
-# write your code here
+print(dir(Cargo))
+print(dir(BaseRobot))
+print(dir(FlyingRobot))
+print(dir(DeliveryDrone))
