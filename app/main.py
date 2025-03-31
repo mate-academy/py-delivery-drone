@@ -42,7 +42,7 @@ class FlyingRobot(BaseRobot):
 class DeliveryDrone(FlyingRobot):
     def __init__(self, name: str, weight: float,
                  max_load_weight: float, current_load: Cargo | None = None,
-                 coords: list = [0, 0, 0]) -> None:
+                 coords: list = None) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
