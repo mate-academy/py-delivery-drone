@@ -42,7 +42,7 @@ class FlyingRobot(BaseRobot):
         if coords is None:
             coords = [0, 0, 0]
         elif len(coords) == 2:
-            coords.append(0)
+            coords = [coords[0], coords[1], 0]
         super().__init__(
             name=name,
             weight=weight,
