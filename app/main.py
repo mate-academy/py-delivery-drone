@@ -38,6 +38,9 @@ class FlyingRobot(BaseRobot):
             coords: list[int] | None = None
     ) -> None:
         coords_temp = coords or [0, 0, 0]
+        if len(coords_temp) != 3:
+            raise ValueError(f"Invalid coords length: {len(coords_temp)}, "
+                             f"required exactly 3 coordinates (x, y, z).")
         super().__init__(name, weight, coords_temp[:2])
         self.coords = coords_temp
 
