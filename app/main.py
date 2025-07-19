@@ -3,10 +3,10 @@ class Cargo:
         self.weight = weight
 
 
-class BaseRobot(Cargo):
+class BaseRobot:
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
-        super().__init__(weight)
         self.name = name
+        self.weight = weight
         if coords is None:
             self.coords = [0, 0]
         else:
