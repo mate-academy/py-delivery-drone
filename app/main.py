@@ -2,8 +2,9 @@ class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
+
 class BaseRobot:
-    def __init__(self, name, weight, coords: list = (0, 0)) -> None:
+    def __init__(self, name: str, weight: int, coords: list = (0, 0)) -> None:
         self.weight = weight
         self.name = name
         # self.coords = coords
@@ -27,8 +28,10 @@ class BaseRobot:
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
+
 class FlyingRobot(BaseRobot):
-    def __init__(self, name, weight, coords: list = (0, 0, 0)) -> None:
+    def __init__(self, name: str, weight: int,
+                 coords: list = (0, 0, 0)) -> None:
 
         if type(coords) is tuple:
             super().__init__(name=name, weight=weight, coords=list(coords))
@@ -41,8 +44,11 @@ class FlyingRobot(BaseRobot):
     def go_down(self, step: int = 1) -> None:
         self.coords[2] -= step
 
+
 class DeliveryDrone(FlyingRobot):
-    def __init__(self, name, weight, max_load_weight, current_load: Cargo = None ,coords: list = (0, 0, 0)) -> None:
+    def __init__(self, name: str, weight: int, max_load_weight: int,
+                 current_load: Cargo = None ,
+                 coords: list = (0, 0, 0)) -> None:
 
         if type(coords) is tuple:
             super().__init__(name=name, weight=weight, coords=list(coords))
