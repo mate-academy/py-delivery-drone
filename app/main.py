@@ -7,7 +7,7 @@ class BaseRobot:
     def __init__(self, name: str, weight: int, coords: list = (0, 0)) -> None:
         self.weight = weight
         self.name = name
-        # self.coords = coords
+
         if type(coords) is tuple:
             self.coords = list(coords)
         else:
