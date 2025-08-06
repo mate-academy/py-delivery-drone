@@ -13,6 +13,10 @@ class BaseRobot:
         else:
             self.coords = coords
 
+    # def __init__(self, name: str, weight: int, max_load_weight: int,
+    #              current_load: Cargo = None,
+    #              coords: list = (0, 0, 0)) -> None:
+
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
 
@@ -50,10 +54,7 @@ class DeliveryDrone(FlyingRobot):
                  current_load: Cargo = None ,
                  coords: list = (0, 0, 0)) -> None:
 
-        if type(coords) is tuple:
-            super().__init__(name=name, weight=weight, coords=list(coords))
-        else:
-            super().__init__(name=name, weight=weight, coords=coords)
+        super().__init__(name=name, weight=weight, coords=list(coords))
 
         self.max_load_weight = max_load_weight
         self.current_load = current_load
