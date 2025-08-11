@@ -11,18 +11,18 @@ class BaseRobot:
         self.weight = weight
         self.coords = list(coords)
 
-    def go_forward(self, steps: int = 1) -> None:
+    def go_forward(self, step: int = 1) -> None:
         self.coords = list(self.coords)
-        self.coords[1] += steps
+        self.coords[1] += step
 
-    def go_back(self, steps: int = 1) -> None:
-        self.coords[1] -= steps
+    def go_back(self, step: int = 1) -> None:
+        self.coords[1] -= step
 
-    def go_right(self, steps: int = 1) -> None:
-        self.coords[0] += steps
+    def go_right(self, step: int = 1) -> None:
+        self.coords[0] += step
 
-    def go_left(self, steps: int = 1) -> None:
-        self.coords[0] -= steps
+    def go_left(self, step: int = 1) -> None:
+        self.coords[0] -= step
 
     def get_info(self) -> str:
         return (f"Robot: {self.name}, Weight: {self.weight}")
@@ -34,11 +34,11 @@ class FlyingRobot(BaseRobot):
                  coords: tuple[int] = (0, 0, 0)) -> None:
         super().__init__(name=name, weight=weight, coords=coords)
 
-    def go_up(self, steps: int = 1) -> None:
-        self.coords[2] += steps
+    def go_up(self, step: int = 1) -> None:
+        self.coords[2] += step
 
-    def go_down(self, steps: int = 1) -> None:
-        self.coords[2] -= steps
+    def go_down(self, step: int = 1) -> None:
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
@@ -46,10 +46,12 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  max_load_weight: int,
                  current_load: Cargo = None,
-                 coords: list[int] = [0, 0, 0]) -> None:
+                 coords: tuple[int] = [0, 0, 0]) -> None:
         super().__init__(name=name, weight=weight, coords=coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
+        if current_load is not None:
+            self.hook_load(current_load)
 
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
