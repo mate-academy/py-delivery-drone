@@ -55,7 +55,11 @@ class FlyingRobot(BaseRobot):
         super().__init__(
             name,
             weight,
-            coords or [0, 0, 0]
+            (
+                [0, 0, 0] if not coords
+                else coords + [0] if len(coords) == 2
+                else coords
+            )
         )
 
     def go_up(
@@ -82,7 +86,7 @@ class DeliveryDrone(FlyingRobot):
         super().__init__(
             name,
             weight,
-            coords or [0, 0, 0]
+            coords
         )
         self.max_load_weight = max_load_weight
         self.current_load = None
