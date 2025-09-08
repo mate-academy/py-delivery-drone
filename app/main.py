@@ -14,12 +14,14 @@ class BaseRobot:
 
         if coords is None:
             self.coords = [0, 0]
-        elif (
-                isinstance(coords, list)
-                and len(coords) == 2
-                and all(isinstance(x, (int, float)) for x in coords)
+        elif not (
+            isinstance(coords, list)
+            and len(coords) == 2
+            and all(isinstance(x, (int, float)) for x in coords)
         ):
             raise ValueError("coords must be a list of two numbers")
+        else:
+            self.coords = coords
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -77,13 +79,15 @@ class DeliveryDrone(FlyingRobot):
         if current_load is not None:
             self.hook_load(current_load)
 
-    def hook_load(self, current_load: Cargo | None = None) -> None:
+    def hook_load(self, cargo: Cargo | None = None) -> None:
 
+        if cargo is None:
+            return
         if (
                 self.current_load is None
-                and current_load.weight <= self.max_load_weight
+                and cargo.weight <= self.max_load_weight
         ):
-            self.current_load = current_load
+            self.current_load = cargo
 
     def unhook_load(self) -> None:
         self.current_load = None
