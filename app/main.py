@@ -3,18 +3,23 @@ class Cargo:
         self.weight = weight
 
 
-class BaseRobot(Cargo):
+class BaseRobot:
     def __init__(
             self, name: str,
             weight: int,
             coords: list[int] | None = None
     ) -> None:
-        super().__init__(weight)
         self.name = name
-        self.coords = coords
+        self.weight = weight
 
         if coords is None:
             self.coords = [0, 0]
+        elif (
+                isinstance(coords, list)
+                and len(coords) == 2
+                and all(isinstance(x, (int, float)) for x in coords)
+        ):
+            raise ValueError("coords must be a list of two numbers")
 
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
@@ -39,7 +44,14 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list[int] | None = None
     ) -> None:
-        coords = coords or [0, 0, 0]
+
+        if coords is None:
+            coords = [0, 0, 0]
+        elif len(coords) == 2:
+            coords = [coords[0], coords[1], 0]
+        elif len(coords) >= 3:
+            coords = coords[:3]
+
         super().__init__(name, weight, coords)
 
     def go_up(self, step: int = 1) -> None:
@@ -60,12 +72,18 @@ class DeliveryDrone(FlyingRobot):
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = current_load
+        self.current_load = None
 
-    def hook_load(self, load: Cargo) -> None:
+        if current_load is not None:
+            self.hook_load(current_load)
 
-        if self.current_load is None and load.weight <= self.max_load_weight:
-            self.current_load = load
+    def hook_load(self, current_load: Cargo | None = None) -> None:
+
+        if (
+                self.current_load is None
+                and current_load.weight <= self.max_load_weight
+        ):
+            self.current_load = current_load
 
     def unhook_load(self) -> None:
         self.current_load = None
