@@ -9,7 +9,12 @@ class Cargo:
 # Tworzenie klasy podstawowy robot z name weight coord = [0,,0]
 class BaseRobot:
 
-    def __init__(self, name: str, weight: int, coords: int = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int] | None = None
+    ) -> None:
         if coords is None:
             self.coords = [0, 0]
         else:
@@ -44,11 +49,21 @@ class BaseRobot:
 
 # Tworzenie klasy FlyingRobot dziedziczenie po BaseRobot
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: int = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int] | None = None
+    ) -> None:
         if coords is None:
             coords = [0, 0, 0]
+        elif len(coords) == 2:
+            coords = coords + [0]
+        else:
+            coords = coords[:3]
 
-        super().__init__(name, weight, coords)
+        super().__init__(name, weight, coords[:2])
+        self.coords = coords
 # latanie w gore
 
     def go_up(self, step: int = 1) -> None:
@@ -68,10 +83,18 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int,
             max_load_weight: int = 0,
-            coords: int = None,
+            coords: list[int] | None = None,
             current_load: Optional["Cargo"] = None
     ) -> None:
-        super().__init__(name, weight, coords)
+        if coords is None:
+            coords = [0, 0, 0]
+        elif len(coords) == 2:
+            coords = coords + [0]
+        else:
+            coords = coords[:3]
+
+        super().__init__(name, weight, coords[:2])
+        self.coords = coords
         self.max_load_weight = max_load_weight
         self.current_load = current_load
         if current_load is not None:
