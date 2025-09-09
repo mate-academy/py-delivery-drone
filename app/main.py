@@ -82,21 +82,14 @@ class DeliveryDrone(FlyingRobot):
             self,
             name: str,
             weight: int,
-            max_load_weight: int = 0,
             coords: list[int] | None = None,
+            max_load_weight: int = 0,
             current_load: Optional["Cargo"] = None
     ) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
-        elif len(coords) == 2:
-            coords = coords + [0]
-        else:
-            coords = coords[:3]
 
-        super().__init__(name, weight, coords[:2])
-        self.coords = coords
+        super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = current_load
+        self.current_load = None
         if current_load is not None:
             self.hook_load(current_load)
 # zaladunek
