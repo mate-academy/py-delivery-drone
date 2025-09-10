@@ -36,6 +36,11 @@ class FlyingRobot(BaseRobot):
             z_coord = 0
         elif len(coords) == 3:
             x_coord, y_coord, z_coord = coords
+        else:
+            raise ValueError("coords must be None or a list of length 2 or 3")
+
+        super().__init__(name, weight, [x_coord, y_coord])
+        self.coords = [x_coord, y_coord, z_coord]  # всегда новый 3D-список
 
         super().__init__(name, weight, [x_coord, y_coord])
         self.coords = [x_coord, y_coord, z_coord]  # 3D-координата всегда новая
@@ -51,14 +56,14 @@ class DeliveryDrone(FlyingRobot):
     def __init__(self, name: str, weight: int,
                  max_load_weight: int,
                  coords: list[int] | None = None,
-                 current_load: "Cargo | None" = None) -> None:
+                 current_load: Cargo | None = None) -> None:
         super().__init__(name=name, weight=weight, coords=coords)
         self.max_load_weight = max_load_weight
         self.current_load = None
         if current_load is not None:
             self.hook_load(current_load)
 
-    def hook_load(self, cargo: "Cargo") -> None:
+    def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is not None:
             return
         if cargo.weight > self.max_load_weight:
