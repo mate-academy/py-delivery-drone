@@ -4,7 +4,9 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: float, coords: list = None) -> None:
+    def __init__(
+        self, name: str, weight: float, coords: list | None = None
+    ) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords if coords is not None else [0, 0]
@@ -26,13 +28,22 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: float, coords: list = None) -> None:
+    def __init__(
+        self, name: str, weight: float, coords: list | None = None
+    ) -> None:
+        # Store the original coords for the flying robot
         if coords is None:
-            coords = [0, 0, 0]
+            full_coords = [0, 0, 0]
         elif len(coords) == 2:
-            coords = coords + [0]
+            full_coords = coords + [0]
+        else:
+            full_coords = coords
 
-        super().__init__(name, weight, coords)
+        # Pass only 2D coordinates to BaseRobot
+        super().__init__(name, weight, [full_coords[0], full_coords[1]])
+
+        # Store the full 3D coordinates for the flying robot
+        self.coords = full_coords
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -43,16 +54,16 @@ class FlyingRobot(BaseRobot):
 
 class DeliveryDrone(FlyingRobot):
     def __init__(
-            self,
-            name: str,
-            weight: float,
-            coords: list = None,
-            max_load_weight: float = 0,
-            current_load: Cargo = None
+        self,
+        name: str,
+        weight: float,
+        coords: list | None = None,
+        max_load_weight: float = 0,
+        current_load: Cargo | None = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = current_load
+        self.current_load = None  # Initialize as None first
 
         # If a cargo was provided during initialization, try to hook it
         if current_load is not None:
