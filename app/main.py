@@ -48,6 +48,8 @@ class FlyingRobot(BaseRobot):
             elif len(coords) == 3:
                 base_coords = coords[:2]
                 full_coords = coords[:]
+            else:
+                raise ValueError("coords must be a 2- or 3-element sequence")
 
         super().__init__(name=name, weight=weight, coords=base_coords)
         self.coords = full_coords
