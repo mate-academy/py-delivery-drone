@@ -31,7 +31,7 @@ class FlyingRobot(BaseRobot):
     def __init__(self, 
                 name: str,
                 weight: int,
-                coords: list[int]
+                coords: list[int] | None = None
     ) -> None:
         if coords is None:
             coords_3d = [0, 0, 0]
