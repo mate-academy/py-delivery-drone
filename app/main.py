@@ -7,7 +7,7 @@ class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list = None) -> None:
+                 coords: list | None = None) -> None:
         if coords is None:
             coords = [0, 0]
         self.name = name
@@ -47,7 +47,6 @@ class FlyingRobot(BaseRobot):
         else:
             raise ValueError("coords must have 2 or 3 elements")
 
-        self.coords = normalized_coords
         super().__init__(name, weight, coords=normalized_coords)
 
     def go_up(self, step: int = 1) -> None:
