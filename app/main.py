@@ -12,19 +12,19 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        self.coords = coords if coords is not None else [0, 0]
+        self.coords = coords or [0, 0]
 
-    def go_forward(self, distance: int = 1) -> None:
-        self.coords[1] += distance
+    def go_forward(self, step: int = 1) -> None:
+        self.coords[1] += step
 
-    def go_back(self, distance: int = 1) -> None:
-        self.coords[1] -= distance
+    def go_back(self, step: int = 1) -> None:
+        self.coords[1] -= step
 
-    def go_right(self, distance: int = 1) -> None:
-        self.coords[0] += distance
+    def go_right(self, step: int = 1) -> None:
+        self.coords[0] += step
 
-    def go_left(self, distance: int = 1) -> None:
-        self.coords[0] -= distance
+    def go_left(self, step: int = 1) -> None:
+        self.coords[0] -= step
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -37,17 +37,13 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list[int] | None = None
     ) -> None:
-        super().__init__(
-            name,
-            weight,
-            coords=[0, 0, 0] if coords is None else coords
-        )
+        super().__init__(name, weight, coords=coords or [0, 0, 0])
 
-    def go_up(self, distance: int = 1) -> None:
-        self.coords[2] += distance
+    def go_up(self, step: int = 1) -> None:
+        self.coords[2] += step
 
-    def go_down(self, distance: int = 1) -> None:
-        self.coords[2] -= distance
+    def go_down(self, step: int = 1) -> None:
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
@@ -59,11 +55,7 @@ class DeliveryDrone(FlyingRobot):
             coords: list[int] | None = None,
             current_load: Cargo | None = None
     ) -> None:
-        super().__init__(
-            name,
-            weight,
-            coords=[0, 0, 0] if coords is None else coords
-        )
+        super().__init__(name, weight, coords=coords)
         self.max_load_weight = max_load_weight
         self.current_load = None
         if current_load is not None:
