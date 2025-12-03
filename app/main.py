@@ -40,8 +40,21 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: Optional[List[int]] = None
     ) -> None:
-        coords_to_use: List[int] = coords \
-            if coords is not None else [0, 0, 0]
+
+        if coords is None:
+            coords_to_use = [0, 0, 0]
+
+        else:
+            # garantir número correto de coordenadas
+            if len(coords) == 2:
+                coords_to_use = [coords[0], coords[1], 0]  # adiciona Z padrão
+
+            elif len(coords) == 3:
+                coords_to_use = coords.copy()  # usa 3D normalmente
+
+            else:
+                raise ValueError("coords must have length 2 or 3")
+
         super().__init__(name, weight, coords_to_use)
 
     def go_up(self, step: int = 1) -> None:
