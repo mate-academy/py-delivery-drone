@@ -29,18 +29,16 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name, weight, coords: list | None = None) -> None:
-
-        # 1. Визначити, що передати BaseRobot
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: list | None = None) -> None:
         parent_coords = None
         if coords is not None:
-            # BaseRobot завжди отримує тільки перші два елементи
             parent_coords = coords[:2]
 
-            # 2. Викликати батька, щоб встановити X і Y
         super().__init__(name, weight, parent_coords)
 
-        # 3. Додати Z-координату
         z_coord = 0
         if coords is not None and len(coords) == 3:
             z_coord = coords[2]
