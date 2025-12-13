@@ -1,5 +1,5 @@
-class Cargo:
-    def __init__(self, weight: int) -> None:
-        self.weight = weight
+from app.drone.base_robot import BaseRobot
+from app.drone.flying_robot import FlyingRobot
+from app.drone.delivery_drone import DeliveryDrone
+from app.drone.cargo import Cargo
 
-# write your code here
