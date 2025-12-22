@@ -47,14 +47,26 @@ class FlyingRobot(BaseRobot):
             self.coords = [0, 0, 0]
         else:
             coords_to_parent = coords[:2]
-            self.coords = coords if len(coords) == 3 else [coords[0], coords[1], 0]
+            self.coords = coords if len(coords) == 3 else [
+                coords[0],
+                coords[1],
+                0,
+            ]
 
-        super().__init__(name=name, weight=weight, coords=coords_to_parent)
+        super().__init__(
+            name=name,
+            weight=weight,
+            coords=coords_to_parent,
+        )
 
         if coords is None:
             self.coords = [0, 0, 0]
         else:
-            self.coords = coords if len(coords) == 3 else [coords[0], coords[1], 0]
+            self.coords = coords if len(coords) == 3 else [
+                coords[0],
+                coords[1],
+                0,
+            ]
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
