@@ -2,7 +2,7 @@ class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
-#variable = other if other else 0
+
 class BaseRobot:
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
         self.name = name
