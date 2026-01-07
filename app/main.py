@@ -1,6 +1,11 @@
 from typing import Optional
 
 
+class Cargo:
+    def __init__(self, weight: int) -> None:
+        self.weight = weight
+
+
 class BaseRobot:
     def __init__(
             self,
@@ -10,6 +15,7 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
+        # Батьківський клас відповідає за ініціалізацію x та y
         self.coords = coords or [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
@@ -35,8 +41,12 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: Optional[list[int]] = None
     ) -> None:
-        initial_coords = coords or [0, 0, 0]
-        super().__init__(name, weight, initial_coords)
+        # Визначаємо початкові координати (3D для цього класу)
+        full_coords = coords or [0, 0, 0]
+        # Передаємо батькові лише x та y через зріз [:2]
+        super().__init__(name, weight, full_coords[:2])
+        # FlyingRobot розширює список координат, додаючи z
+        self.coords.append(full_coords[2])
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -52,16 +62,16 @@ class DeliveryDrone(FlyingRobot):
             weight: int,
             max_load_weight: int,
             coords: Optional[list[int]] = None,
-            current_load: Optional["Cargo"] = None
+            current_load: Optional[Cargo] = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = None
-        
+
         if current_load:
             self.hook_load(current_load)
 
-    def hook_load(self, cargo: "Cargo") -> None:
+    def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
             self.current_load = cargo
 
