@@ -12,7 +12,6 @@ class BaseRobot:
         )
 
     def go_forward(self, step: int = 1) -> None:
-        print(self)
         self.coords[1] += step
 
     def go_back(self, step: int = 1) -> None:
