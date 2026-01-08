@@ -5,10 +5,14 @@ from app.cargo.base.cargo import Cargo
 
 
 if __name__ == "__main__":
-    robot_1 = BaseRobot("mike", 1)
-    robot_2 = BaseRobot("john", 1)
-    robot_1.go_forward(1)
-    robot_2.go_forward(3)
-    robot_2.go_forward(3)
-    print(robot_1.coords)
-    print(robot_2.coords)
+    base_robot = BaseRobot("mike", 1)
+    flying_robot = FlyingRobot("john", 1)
+    delivery_drone = DeliveryDrone("jim", 1)
+    print(base_robot.get_info())
+    print(flying_robot.get_info())
+    print(delivery_drone.get_info())
+    cargo = Cargo(10)
+    delivery_drone.hook_load(cargo)
+    print(delivery_drone.get_info())
+    delivery_drone.unhook_load()
+    print(delivery_drone.get_info())
