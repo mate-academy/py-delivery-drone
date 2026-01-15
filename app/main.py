@@ -2,6 +2,7 @@ class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
+
 class BaseRobot:
     def __init__(
             self,
@@ -25,8 +26,9 @@ class BaseRobot:
     def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
-    def get_info(self):
+    def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
+
 
 class FlyingRobot(BaseRobot):
     def __init__(
@@ -63,13 +65,13 @@ class DeliveryDrone(FlyingRobot):
         if current_load is not None:
             self.hook_load(current_load)
 
-
     def hook_load(self, cargo: Cargo) -> None:
-        if (self.current_load is None
+        if (
+                self.current_load is None
                 and cargo is not None
                 and (hasattr(cargo, "weight")
-                and cargo.weight <= self.max_load_weight)):
+                     and cargo.weight <= self.max_load_weight)):
             self.current_load = cargo
 
-    def unhook_load(self):
+    def unhook_load(self) -> None:
         self.current_load = None
