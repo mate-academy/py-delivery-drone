@@ -3,7 +3,7 @@ import ast
 import inspect
 
 from app import main
-from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
+from app.main import (BaseRobot, FlyingRobot, DeliveryDrone, Cargo)
 
 
 @pytest.mark.parametrize(
