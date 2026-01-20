@@ -2,4 +2,70 @@ class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
-# write your code here
+
+class BaseRobot:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int] = None) -> None:
+        self.weight = weight
+        self.name = name
+        self.coords = coords if coords is not None else [0, 0]
+
+    def go_forward(self, step: int = 1) -> None:
+        self.coords[1] += step
+
+    def go_back(self, step: int = 1) -> None:
+        self.coords[1] -= step
+
+    def go_right(self, step: int = 1) -> None:
+        self.coords[0] += step
+
+    def go_left(self, step: int = 1) -> None:
+        self.coords[0] -= step
+
+    def get_info(self) -> None:
+        return f"Robot: {self.name}, Weight: {self.weight}"
+
+
+class FlyingRobot(BaseRobot):
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list[int] = None) -> None:
+        super().__init__(name, weight)
+        self.coords = coords if coords is not None else [0, 0, 0]
+
+    def go_up(self, step: int = 1) -> None:
+        self.coords[2] += step
+
+    def go_down(self, step: int = 1) -> None:
+        self.coords[2] -= step
+
+
+class DeliveryDrone(FlyingRobot):
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            max_load_weight: int,
+            current_load: Cargo = None,
+            coords: list[int] = None) -> None:
+
+        super().__init__(name, weight, coords)
+        self.current_load = current_load
+        self.max_load_weight = max_load_weight
+
+    def hook_load(self, cargo_obj: Cargo) -> None:
+        if self.current_load is None:
+            if self.max_load_weight >= cargo_obj.weight:
+                self.current_load = cargo_obj
+            else:
+                print("The cargo is too heavy.")
+        else:
+            print("Already loaded.")
+
+    def unhook_load(self) -> None:
+        self.current_load = None
