@@ -31,20 +31,16 @@ class BaseRobot:
 class FlyingRobot(BaseRobot):
     def __init__(self, name: str, weight: int,
                  coords: list[int] = None) -> None:
-        # If no coords provided, use default 3D coordinates
         if coords is None:
             coords = [0, 0, 0]
 
-        # If coords provided but missing z coordinate, add it as 0
         if len(coords) == 2:
             coords = coords + [0]
         elif len(coords) != 3:
             raise ValueError("Flying robot requires 2D or 3D coordinates")
 
-        # Use super() to call parent's __init__ with only x,y coordinates
         super().__init__(name, weight, coords[:2])
 
-        # Then manually add the z coordinate
         self.coords.append(coords[2])
 
     def go_up(self, step: int = 1) -> None:
