@@ -43,7 +43,7 @@ class FlyingRobot(BaseRobot):
         elif len(coords) == 2:
             coords_to_pass = coords + [0]
         elif len(coords) == 3:
-            pass
+            coords_to_pass = coords[:]
         super().__init__(name, weight, coords=coords_to_pass)
 
     def go_up(self, step: int = 1) -> None:
