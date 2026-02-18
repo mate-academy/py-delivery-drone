@@ -41,7 +41,7 @@ flying_robot.go_up(10)
 
 **DeliveryDrone**
 
-- inherits from `FlyingRobot`
+- inherits from ` FlyingRobot`
 - takes the same args as `FlyingRobot` and passes them 
 to the parent's `__init__` method. 
 - the `__init__` method also takes and stores `max_load_weight` and `current_load`.
@@ -75,7 +75,7 @@ drone = DeliveryDrone(
     weight=9, 
     max_load_weight=30, 
     current_load=Cargo(20),
-)
+)   
 drone.unhook_load()
 # drone.current_load is None
 ```
