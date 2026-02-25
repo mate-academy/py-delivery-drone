@@ -37,7 +37,7 @@ class FlyingRobot(BaseRobot):
     def __init__(
         self,
         name: str,
-        weight: float,
+        weight: int,
         coords: Optional[List[int]] = None,
     ) -> None:
         if coords is None:
@@ -55,7 +55,7 @@ class DeliveryDrone(FlyingRobot):
     def __init__(
         self,
         name: str,
-        weight: float,
+        weight: int,
         max_load_weight: int,
         coords: Optional[List[int]] = None,
         current_load: Optional[Cargo] = None,
