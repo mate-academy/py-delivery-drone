@@ -24,10 +24,7 @@ class BaseRobot:
         self.name = name
         self.weight = weight
         # If coordinates are not passed, set [0, 0] by default
-        if coords is None:
-            self.coords = [0, 0]
-        else:
-            self.coords = coords.copy()
+        self.coords = (coords or [0, 0]).copy()
 
     def go_forward(self, step: int = 1) -> None:
         """Move the robot forward by increasing the Y coordinate."""
@@ -38,11 +35,11 @@ class BaseRobot:
         self.coords[0] += step
 
     def go_left(self, step: int = 1) -> None:
-        """Move the robot left by increasing the X coordinate."""
+        """Move the robot left by decreasing the X coordinate."""
         self.coords[0] -= step
 
     def go_back(self, step: int = 1) -> None:
-        """Move the robot back by increasing the Y coordinate."""
+        """Move the robot back by decreasing the Y coordinate."""
         self.coords[1] -= step
 
     def get_info(self) -> str:
@@ -101,7 +98,7 @@ class DeliveryDrone(FlyingRobot):
         if current_load:
             self.hook_load(current_load)
 
-    def hook_load(self, cargo: Cargo | None) -> None:
+    def hook_load(self, cargo: Cargo) -> None:
         """
         Attach cargo to the drone if it's currently empty
         and the cargo weight is within limits.
