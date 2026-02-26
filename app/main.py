@@ -51,9 +51,9 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    """
-    A robot capable of moving in 3D space (X, Y, Z).
-    """
+    # """
+    # A robot capable of moving in 3D space (X, Y, Z).
+    # """
     def __init__(
             self,
             name: str,
@@ -81,9 +81,9 @@ class FlyingRobot(BaseRobot):
 
 
 class DeliveryDrone(FlyingRobot):
-    """
-    A drone that can fly and carry cargo within its weight limit.
-    """
+    # """
+    # A drone that can fly and carry cargo within its weight limit.
+    # """
     def __init__(
             self,
             name: str,
