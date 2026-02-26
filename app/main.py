@@ -15,22 +15,28 @@ class BaseRobot:
             weight: int | float,
             coords: list | None = None
     ) -> None:
-        pass
+        self.name = name
+        self.weight = weight
+        # If coordinates are not passed, set [0, 0] by default
+        if coords is None:
+            self.coords = [0, 0]
+        else:
+            self.coords = coords.copy()
 
     def go_forward(self, step: int = 1) -> None:
-        pass
+        self.coords[1] += step
 
     def go_right(self, step: int = 1) -> None:
-        pass
+        self.coords[0] += step
 
     def go_left(self, step: int = 1) -> None:
-        pass
+        self.coords[0] -= step
 
     def go_back(self, step: int = 1) -> None:
-        pass
+        self.coords[1] -= step
 
     def get_info(self) -> str:
-        pass
+        return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
