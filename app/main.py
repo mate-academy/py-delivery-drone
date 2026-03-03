@@ -4,7 +4,11 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(self,
+                 name: str,
+                 weight: int,
+                 coords: list | None = None
+                 ) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords if coords is not None else [0, 0]
@@ -26,7 +30,12 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list | None = None
+    ) -> None:
         if coords is None:
             coords = [0, 0, 0]
         elif len(coords) == 2:
@@ -44,9 +53,9 @@ class DeliveryDrone(FlyingRobot):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list = None,
+                 coords: list | None = None,
                  max_load_weight: int = 0,
-                 current_load: "Cargo" = None
+                 current_load: "Cargo" | None = None
                  ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
@@ -54,7 +63,7 @@ class DeliveryDrone(FlyingRobot):
         if current_load is not None:
             self.hook_load(current_load)
 
-    def hook_load(self, cargo: "Cargo" = None) -> None:
+    def hook_load(self, cargo: "Cargo" | None = None) -> None:
         if cargo is None:
             return
         if not hasattr(cargo, "weight"):
