@@ -43,9 +43,15 @@ class FlyingRobot(BaseRobot):
                          )
 
     def go_up(self, step: int = 1) -> None:
+        if len(self.coords) < 3:
+            self.coords.append(0)
+
         self.coords[2] += step
 
     def go_down(self, step: int = 1) -> None:
+        if len(self.coords) < 3:
+            self.coords.append(0)
+
         self.coords[2] -= step
 
 
