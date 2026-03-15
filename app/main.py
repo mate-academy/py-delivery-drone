@@ -41,7 +41,7 @@ class FlyingRobot(BaseRobot):
         coords: list[int] | None = None
     ) -> None:
         if coords is None:
-            self.coords = coords or [0, 0, 0]
+            coords = [0, 0, 0]
         elif len(coords) == 2:
             coords = list(coords) + [0]
 
