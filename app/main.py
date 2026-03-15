@@ -8,7 +8,7 @@ class BaseRobot:
         self: "BaseRobot",
         name: str,
         weight: float,
-        coords: list[int] = None
+        coords: list[int] | None = None
     ) -> None:
         self.name = name
         self.weight = weight
@@ -38,7 +38,7 @@ class FlyingRobot(BaseRobot):
         self,
         name: str,
         weight: float,
-        coords: list[int] = None
+        coords: list[int] | None = None
     ) -> None:
         if coords is None:
             coords = [0, 0, 0]
