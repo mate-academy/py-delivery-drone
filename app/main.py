@@ -13,7 +13,7 @@ class BaseRobot:
         self.name = name
         self.weight = weight
         if coords is None:
-            self.coords = [0, 0]
+            self.coords = coords or [0, 0]
         else:
             self.coords = coords
 
@@ -41,7 +41,7 @@ class FlyingRobot(BaseRobot):
         coords: list[int] | None = None
     ) -> None:
         if coords is None:
-            coords = [0, 0, 0]
+            self.coords = coords or [0, 0, 0]
         elif len(coords) == 2:
             coords = list(coords) + [0]
 
@@ -59,7 +59,7 @@ class DeliveryDrone(FlyingRobot):
         self,
         name : str,
         weight: float,
-        coords: list[int] = None,
+        coords: list[int] | None = None,
         max_load_weight: int = 0,
         current_load: "Cargo" = None
     ) -> None:
