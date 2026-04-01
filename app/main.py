@@ -1,7 +1,11 @@
 class Cargo:
+
     def __init__(self, weight: int) -> None:
+
         self.weight = weight
 
+
+# write your code here
 class BaseRobot:
     def __init__(
         self,
@@ -28,7 +32,9 @@ class BaseRobot:
     def get_into(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
+
 class FlyingRobot(BaseRobot):
+
     def __init__(
         self,
         name: str,
@@ -44,12 +50,14 @@ class FlyingRobot(BaseRobot):
     def go_down(self, step: int = 1) -> None:
         self.coords[2] -= step
 
+
 class DeliveryDrone(FlyingRobot):
+
     def __init__(
         self,
         name: str,
         weight: int,
-        max_load_weight: int = 0,
+        max_load_weight: int,
         current_load: Cargo | None = None,
         coords: list[int] | None = None
     ) -> None:
