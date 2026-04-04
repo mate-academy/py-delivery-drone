@@ -2,7 +2,9 @@ class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
 
+
 Coords = None | list[int]
+
 
 class BaseRobot:
     def __init__(
