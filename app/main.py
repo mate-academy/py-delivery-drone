@@ -5,10 +5,14 @@ class Cargo:
 
 class BaseRobot:
     def __init__(
-            self, name: str, weight: int | float, coords: list = None
+            self,
+            name: str,
+            weight: int | float,
+            coords: list | None = None
     ) -> None:
         self.name = name
         self.weight = weight
+        # Initialize to 2D default if None is provided
         self.coords = coords if coords is not None else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
@@ -29,10 +33,15 @@ class BaseRobot:
 
 class FlyingRobot(BaseRobot):
     def __init__(
-            self, name: str, weight: int | float, coords: list = None
+            self,
+            name: str,
+            weight: int | float,
+            coords: list | None = None
     ) -> None:
-        coords = coords if coords is not None else [0, 0, 0]
         super().__init__(name, weight, coords)
+
+        if len(self.coords) == 2:
+            self.coords.append(0)
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -47,8 +56,8 @@ class DeliveryDrone(FlyingRobot):
             name: str,
             weight: int | float,
             max_load_weight: int | float,
-            current_load: Cargo = None,
-            coords: list = None,
+            current_load: Cargo | None = None,
+            coords: list | None = None,
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
@@ -65,5 +74,4 @@ class DeliveryDrone(FlyingRobot):
             self.current_load = cargo
 
     def unhook_load(self) -> None:
-        # Unconditionally drop cargo
         self.current_load = None
