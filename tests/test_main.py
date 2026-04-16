@@ -1,9 +1,9 @@
-import pytest
 import ast
 import inspect
+import pytest
 
 from app import main
-from app.main import BaseRobot, FlyingRobot, DeliveryDrone, Cargo
+from app.main import *
 
 
 @pytest.mark.parametrize(
