@@ -5,6 +5,7 @@ class Cargo:
         self.weight = weight
 
 # write your code here
+
 class BaseRobot:
     def __init__(
         self,
