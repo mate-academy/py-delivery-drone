@@ -11,17 +11,17 @@ class BaseRobot:
         self.weight = weight
         self.coords = coords
 
-    def go_forward(self, number: int = 0) -> None:
-        self.coords[1] += number or 1
+    def go_forward(self, step: int = 0) -> None:
+        self.coords[1] += step or 1
 
-    def go_back(self, number: int = 0) -> None:
-        self.coords[1] -= number or 1
+    def go_back(self, step: int = 0) -> None:
+        self.coords[1] -= step or 1
 
-    def go_right(self, number: int = 0) -> None:
-        self.coords[0] += number or 1
+    def go_right(self, step: int = 0) -> None:
+        self.coords[0] += step or 1
 
-    def go_left(self, number: int = 0) -> None:
-        self.coords[0] -= number or 1
+    def go_left(self, step: int = 0) -> None:
+        self.coords[0] -= step or 1
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
@@ -33,22 +33,25 @@ class FlyingRobot(BaseRobot):
             coords = [0, 0, 0]
         super().__init__(name, weight, coords)
 
-    def go_up(self, number: int = 0) -> None:
-        self.coords[2] += number or 1
+    def go_up(self, step: int = 0) -> None:
+        self.coords[2] += step or 1
 
-    def go_down(self, number: int = 0) -> None:
-        self.coords[2] -= number or 1
+    def go_down(self, step: int = 0) -> None:
+        self.coords[2] -= step or 1
 
 
 class DeliveryDrone(FlyingRobot):
     def __init__(self, name: str, weight: int, max_load_weight: int,
-                 current_load: int = None, coords: list = None) -> None:
+                 current_load: Cargo | None = None,
+                 coords: list = None) -> None:
 
         if coords is None:
             coords = [0, 0, 0]
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = current_load
+        self.current_load = None
+        if current_load is not None:
+            self.hook_load(current_load)
 
     def hook_load(self, cargo: Cargo) -> None:
         if not self.current_load and cargo.weight <= self.max_load_weight:
