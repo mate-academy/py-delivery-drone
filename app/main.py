@@ -11,7 +11,7 @@ class BaseRobot:
         self,
         name: str,
         weight: int,
-        coords: Union[tuple[int, int], None] = None
+        coords: Union[list[int], None] = None
     ) -> None:
         self.name = name
         self.weight = weight
@@ -38,13 +38,18 @@ class FlyingRobot(BaseRobot):
         self,
         name: str,
         weight: int,
-        coords: Union[tuple[int, int, int], None] = None
+        coords: Union[list[int], None] = None
     ) -> None:
+        coords_2d = list(coords)[:2] if coords else [0, 0]
         super().__init__(
             name,
             weight,
-            list(coords) if coords else [0, 0, 0]
+            coords_2d
         )
+        if coords and len(coords) > 2:
+            self.coords.append(coords[2])
+        else:
+            self.coords.append(0)
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -58,13 +63,13 @@ class DeliveryDrone(FlyingRobot):
         self,
         name: str,
         weight: int,
-        coords: Union[tuple[int, int, int], None] = None,
+        coords: Union[list[int], None] = None,
         max_load_weight: int = 0,
         current_load: Union["Cargo", None] = None
     ) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = current_load
+        self.current_load = None
         if current_load is not None:
             self.hook_load(current_load)
         else:
