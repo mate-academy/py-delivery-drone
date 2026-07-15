@@ -4,10 +4,10 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: int, cords: list[int] = [0, 0]) -> None:
+    def __init__(self, name: str, weight: int, cords: list[int] | None = None) -> None:
         self.name = name
         self.weight = weight
-        self.cords = cords
+        self.cords = cords or [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
         self.cords[1] += step
