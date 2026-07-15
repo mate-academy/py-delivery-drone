@@ -20,3 +20,14 @@ class BaseRobot:
 
     def go_left(self, step: int = 1) -> None:
         self.cords[0] -= step
+
+
+class FlyingRobot(BaseRobot):
+    def __init__(self, name: str, weight: int, cords: list[int] = [0, 0, 0]) -> None:
+        super().__init__(name, weight, cords)
+
+    def go_up(self, step: int = 1) -> None:
+        self.cords[2] += step
+
+    def go_down(self, step: int = 1) -> None:
+        self.cords[2] -= step
