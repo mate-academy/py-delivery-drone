@@ -12,7 +12,6 @@ class BaseRobot:
     ) -> None:
         self.name = name
         self.weight = weight
-        # Безпечне створення списку за замовчуванням
         self.coords = list(coords) if coords is not None else [0, 0]
 
     def go_forward(self, step: int = 1) -> None:
@@ -38,7 +37,6 @@ class FlyingRobot(BaseRobot):
         weight: int,
         coords: list = None
     ) -> None:
-        # Обробка координат для польоту (має бути 3 осі: x, y, z)
         if coords is None:
             base_coords = [0, 0, 0]
         else:
