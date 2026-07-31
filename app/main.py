@@ -4,6 +4,7 @@ class Cargo:
 
 # write your code here
 
+
 class BaseRobot:
     def __init__(self, name: str, weight: int, coords: list = None) -> None:
         if coords is None:
@@ -27,3 +28,17 @@ class BaseRobot:
 
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
+
+
+class FlyingRobot(BaseRobot):
+    def __init__(self, name: str, weight: int, coords: list = None) -> None:
+        if coords is None:
+            coords = [0, 0, 0]
+
+        super().__init__(name, weight, coords)
+
+    def go_up(self, step: int = 1) -> None:
+        self.coords[2] += step
+
+    def go_down(self, step: int = 1) -> None:
+        self.coords[2] -= step
