@@ -6,7 +6,6 @@ before starting.
 Let's implement 3 classes with inheritance
 
 **BaseRobot**
-
 - the `__init__` method takes `name`, `weight`, `coords`, 
 and saves them
 - `coords` is list with `x` and `y` coordinates, set to [0, 0] by default.
