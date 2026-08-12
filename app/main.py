@@ -51,11 +51,11 @@ class FlyingRobot(BaseRobot):
         else:
             self.coords.append(0)
 
-    def go_up(self, number: int = 1) -> None:
-        self.coords[2] += number
+    def go_up(self, step: int = 1) -> None:
+        self.coords[2] += step
 
-    def go_down(self, number: int = 1) -> None:
-        self.coords[2] -= number
+    def go_down(self, step: int = 1) -> None:
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
