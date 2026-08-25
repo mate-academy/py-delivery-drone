@@ -25,10 +25,10 @@ class BaseRobot:
     def go_back(self, step: int = 1) -> None:
         self.coords[1] -= step
 
-    def go_right(self, step: int = 0) -> None:
+    def go_right(self, step: int = 1) -> None:
         self.coords[0] += step
 
-    def go_left(self, step: int = 0) -> None:
+    def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
     def get_info(self) -> str:
