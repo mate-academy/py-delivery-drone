@@ -1,3 +1,4 @@
+from __future__ import annotations
 class Cargo:
     def __init__(self, weight: int) -> None:
         self.weight = weight
@@ -44,13 +45,16 @@ class DeliveryDrone(FlyingRobot):
         name: str,
         weight: int,
         max_load_weight: int,
-        current_load: Cargo = None,
-        coords: list = [0, 0, 0],
+        current_load: Cargo  | None = None,
+        coords: list = None,
     ) -> None:
+        coords = coords if coords is not None else [0, 0, 0]
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = current_load
-        self.hook_load(current_load)
+        self.current_load = None
+        if current_load is not None:
+            self.hook_load(current_load)
+        
 
     def hook_load(self, cargo: Cargo) -> None:
         if not isinstance(cargo, Cargo):
