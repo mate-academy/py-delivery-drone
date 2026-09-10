@@ -25,7 +25,6 @@ class BaseRobot:
         self.coords[0] -= step
 
     def get_info(self) -> str:
-        #return f"Robot: {self.name}, Weight: {self.weight}, Coords: {self.coords}"
         return (f"Robot: {self.name},"
                 f"Weight: {self.weight},"
                 f"Coords: {self.coords}")
