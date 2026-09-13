@@ -26,14 +26,32 @@ class BaseRobot:
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
+
 class FlyingRobot(BaseRobot):
     def __init__(
         self, name: str, weight: int, coords: list[int] = [0, 0, 0]
     ) -> None:
         super().__init__(name=name, weight=weight, coords=coords)
-    
+
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += 1
 
     def go_down(self, step: int = 1) -> None:
         self.coords[2] -= 1
+
+
+class DeliveryDrone(FlyingRobot):
+    def __init__(
+        self, name: str, weight: int, coords: list[int],
+        max_load_weigth: int, current_load: Cargo | None = None
+    ) -> None:
+        super().__init__(name, weight, coords)
+        self.max_load_weigth = max_load_weigth
+        self.current_load = current_load
+
+    def hook_load(self, cargo: Cargo) -> None:
+        if (
+            self.current_load is None
+            and cargo.weight <= self.max_load_weigth
+        ):
+            self.current_load = cargo
