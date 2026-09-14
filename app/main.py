@@ -35,7 +35,7 @@ class FlyingRobot(BaseRobot):
             self,
             name: str,
             weight: int,
-            coords: list = None
+            coords: list | None = None
     ) -> None:
         super().__init__(name, weight, coords or [0, 0, 0])
 
