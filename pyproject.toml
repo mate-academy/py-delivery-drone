@@ -1,0 +1,14 @@
+[project]
+name = "py-delivery-drone"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flake8>=7.3.0",
+    "flake8-annotations>=3.2.0",
+    "flake8-quotes>=3.4.0",
+    "flake8-variables-names>=0.0.6",
+    "pep8-naming>=0.15.1",
+    "pytest>=9.1.1",
+]
