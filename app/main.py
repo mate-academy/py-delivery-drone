@@ -54,8 +54,10 @@ class DeliveryDrone(FlyingRobot):
                  coords: list[int] = None,
                  current_load: Cargo | None = None) -> None:
         super().__init__(name, weight, coords)
-        self.max_load_weight = max_load_weight
         self.current_load = current_load
+        self.max_load_weight = max_load_weight
+        if current_load is not None:
+            self.hook_load(current_load)
 
     def hook_load(self, other: Cargo) -> None:
         if (self.current_load is None
