@@ -53,7 +53,7 @@ to the parent's `__init__` method.
 not greater than `max_load_weight` of the drone. Otherwise, do nothing.
 - has `unhook_load` method, that sets `current_load` to None without any additional logic.
 ```python
-cargo = Cargo(14)
+cargo = Cargo(1
 drone = DeliveryDrone(
     name="Jim", 
     weight=18, 
