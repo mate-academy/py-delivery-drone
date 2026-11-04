@@ -4,7 +4,12 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: float | int, coords: list | None = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        weight: float | int,
+        coords: list | None = None
+    ) -> None:
         self.name = name
         self.weight = weight
         self.coords = coords or [0, 0]
@@ -26,7 +31,12 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: float | int, coords: list | None = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        weight: float | int,
+        coords: list | None = None
+    ) -> None:
         if coords is None:
             coords = [0, 0, 0]
         super().__init__(name, weight, coords)
@@ -59,3 +69,6 @@ class DeliveryDrone(FlyingRobot):
 
     def unhook_load(self) -> None:
         self.current_load = None
+
+
+# ready for review
