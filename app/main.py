@@ -7,7 +7,8 @@ class Cargo:
 
 
 class BaseRobot:
-    def __init__(self, name: str, weight: float, coords: list = None) -> None:
+    def __init__(self, name: str, weight: float,
+                 coords: Optional[list] = None) -> None:
         coords = coords or [0, 0]
         self.name = name
         self.weight = weight
@@ -25,12 +26,13 @@ class BaseRobot:
     def go_left(self, step: int = 1) -> None:
         self.coords[0] -= step
 
-    def get_info(self) -> None:
+    def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str, weight: float, coords: list = None) -> None:
+    def __init__(self, name: str, weight: float,
+                 coords: Optional[list] = None) -> None:
         coords = coords or [0, 0, 0]
         super().__init__(name, weight, coords[:2])
         self.coords = coords
@@ -44,7 +46,7 @@ class FlyingRobot(BaseRobot):
 
 class DeliveryDrone(FlyingRobot):
     def __init__(self, name: str, weight: float,
-                 max_load_weight: float, coords: list = None,
+                 max_load_weight: float, coords: Optional[list] = None,
                  current_load: Optional["Cargo"] = None) -> None:
         coords = coords or [0, 0, 0]
         super().__init__(name, weight, coords)
