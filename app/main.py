@@ -40,9 +40,8 @@ class FlyingRobot(BaseRobot):
             weight: int | float,
             coords: list[int | float] | None = None,
     ) -> None:
-        if coords is None:
-            coords = [0, 0, 0]
-        elif len(coords) == 2:
+        coords = [0, 0, 0] if coords is None else coords
+        if len(coords) == 2:
             coords = [coords[0], coords[1], 0]
         else:
             coords = list(coords)
